@@ -1,6 +1,4 @@
-.App {
-
-}
+.App {}
 
 .center {
   text-align: center;
@@ -13,5 +11,4 @@
   justify-content: space-between;
 
 }
-@media (prefers-reduced-motion: no-preference) {
-}
+@media (prefers-reduced-motion: no-preference) {}
