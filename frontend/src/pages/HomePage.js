@@ -20,7 +20,7 @@ export default function HomePage() {
           </div>
 
           <div className="HomePage__aside--wrapper">
-            <div className="center">
+            <div className="logo center">
               <Link to="/">
                 <img src={logo} alt="Task Zen logo" />
               </Link>
@@ -36,8 +36,10 @@ export default function HomePage() {
               <button style={{ marginTop: "3rem" }} className="btn-accent">
                 Login
               </button>
-              <button className="btn-white">Register</button>
             </form>
+            <Link to="/register">
+              <button className="btn-white">Register</button>
+            </Link>
             <div>
               <p className="or center">-------- or --------</p>
               <div className="login-icons">
@@ -61,10 +63,12 @@ export default function HomePage() {
           <h1>Task Zen</h1>
           <p>
             Effortless Productivity in Your Pocket! Organize, prioritize, and
-            conquer tasks with ease. Your shortcut to stress-free success!"
+            conquer tasks with ease. Your shortcut to stress-free success!
           </p>
 
-          <div className="checklist-img"><img src={img} alt="Task Zen design element" /></div>
+          <div className="checklist-img">
+            <img src={img} alt="Task Zen design element" />
+          </div>
         </main>
       </section>
     </div>

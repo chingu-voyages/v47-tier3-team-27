@@ -144,3 +144,8 @@ label {
     color: var(--clr-dark-green);
     background-color: var(--clr-white);
 }
+
+.center {
+    text-align: center;
+}
+  
