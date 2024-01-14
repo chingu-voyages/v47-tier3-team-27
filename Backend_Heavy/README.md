@@ -32,23 +32,29 @@ Welcome to the Task Management Application Backend repository! This backend comp
 [Docker](https://www.docker.com/) is utilized for containerization, ensuring consistent application performance across various environments.
 
 #### Build Docker Image
+
+
 ```bash
+
 docker build -t task-management-backend .
 
+```
 
 Run Docker Container
 
 ```bash
 docker run -p 3000:3000 -d task-management-backend
 
+```
 
-NGINX for Load Balancing
+- NGINX for Load Balancing
 
 NGINX is employed for load balancing, distributing incoming traffic across multiple backend instances for improved scalability.
 NGINX Installation
 
 ```bash
     docker run -p 3000:3000 -d task-management-backend
+```
 
 ## NGINX for Load Balancing
 
@@ -57,7 +63,7 @@ NGINX is employed for load balancing, distributing incoming traffic across multi
 ```bash
     sudo apt-get update
     sudo apt-get install nginx
-
+```
 Configure NGINX:
 Update the NGINX configuration file (/etc/nginx/nginx.conf) to include the load balancing configuration.
 
