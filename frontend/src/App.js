@@ -1,4 +1,6 @@
 import "./App.css";
+import './styles/utilityClassesAndReset.css'
+
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import HomePage from "./pages/HomePage";
 
