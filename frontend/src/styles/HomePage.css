@@ -24,6 +24,13 @@
     height: 100%;
     padding-block: 10%;
 }
+.HomePage__aside--wrapper .logo {
+    display: inline;
+    text-align: center;
+    margin-inline: auto;
+    border: 1px solid red;
+    width: 100%;
+}
 .HomePage main {
     width: 75%;
     padding: 4.375rem;
