@@ -13,7 +13,7 @@ export default function RegisterPage() {
     <div className="min-h-screen">
       <section className="w-full h-screen flex">
         {/* Left column */}
-        <aside className="w-[25%] py-4 px-8 space-y-10 bg-lightGreen">
+        <aside className="w-[25%] py-4 px-8 space-y-24 bg-lightGreen">
           <div className="flex justify-center gap-6">
             <img src={circles} alt="" srcset="" />
             <h2 className="leading-[1]">
@@ -26,7 +26,7 @@ export default function RegisterPage() {
             streamlined success
           </p>
 
-          <div className="flex justify-center pt-20">
+          <div className="flex justify-center">
             <img src={checklist} className="w-[70%]" alt="" srcset="" />
           </div>
         </aside>
@@ -50,9 +50,9 @@ export default function RegisterPage() {
 
             <Button className="mt-10">Register</Button>
 
-            <Link to="/register">
+            <Link to="/">
               <Button className="mt-10" type="white">
-                Register
+                Login
               </Button>
             </Link>
           </form>

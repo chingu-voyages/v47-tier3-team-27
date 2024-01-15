@@ -8,6 +8,7 @@ import img from "../assets/checklist-img.png";
 import twitter from "../assets/twitter.png";
 import gmail from "../assets/gmail.png";
 import { Link } from "react-router-dom";
+import Logo from "../components/Logo";
 
 export default function HomePage() {
   return (
@@ -20,12 +21,7 @@ export default function HomePage() {
           </div>
 
           <div className="HomePage__aside--wrapper">
-            <div className="logo center">
-              <Link to="/">
-                <img src={logo} alt="Task Zen logo" />
-              </Link>
-              <p>Your daily task manager</p>
-            </div>
+            <Logo />
             <form action="">
               <label htmlFor="">Username / Email:</label>
               <input type="text" placeholder="enter username/email" />
