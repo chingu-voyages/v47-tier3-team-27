@@ -2,6 +2,22 @@
 @tailwind components;
 @tailwind utilities;
 
+h2 {
+  @apply text-[40px] font-thin;
+}
+
+label {
+  @apply text-darkGreen font-[0.875rem] mb-[0.4rem] mt-[1rem];
+}
+
+input {
+  @apply h-9 rounded-md border border-mediumGreen px-4;
+}
+
+button {
+  
+}
+
 body {
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
