@@ -29,7 +29,7 @@ export default function HomePage() {
               <label htmlFor="">Password:</label>
               <input type="password" placeholder="enter password" />
 
-              <button style={{ marginTop: "3rem" }} className="btn-accent">
+              <button className="btn-accent mt-12">
                 Login
               </button>
             </form>
