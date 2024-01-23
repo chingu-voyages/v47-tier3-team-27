@@ -1,6 +1,5 @@
 import React from "react";
 import "../styles/HomePage.css";
-import logo from "../assets/LOGO.png";
 import circles from "../assets/3circles.svg";
 import plant from "../assets/plant.png";
 import fb from "../assets/fb.png";
@@ -29,9 +28,7 @@ export default function HomePage() {
               <label htmlFor="">Password:</label>
               <input type="password" placeholder="enter password" />
 
-              <button className="btn-accent mt-12">
-                Login
-              </button>
+              <button className="btn-accent mt-12">Login</button>
             </form>
             <Link to="/register">
               <button className="btn-white">Register</button>

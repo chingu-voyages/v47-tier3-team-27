@@ -62,9 +62,10 @@ a {
     color: inherit;
 }
 
-a:visited {
+/* Commented by Celine: impact the text color on active page on the sidenavbar */
+/* a:visited {
     color: inherit;
-}
+} */
 
 input,
 button,
