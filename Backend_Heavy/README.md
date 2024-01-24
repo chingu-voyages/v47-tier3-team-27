@@ -58,29 +58,32 @@ NGINX Installation
 
 ## NGINX for Load Balancing
 
-NGINX is employed for load balancing, distributing incoming traffic across multiple backend instances for improved scalability.
+- NGINX is employed for load balancing, distributing incoming traffic across multiple backend instances for improved scalability.
 
 ```bash
     sudo apt-get update
     sudo apt-get install nginx
 ```
-Configure NGINX:
+- Configure NGINX:
 Update the NGINX configuration file (/etc/nginx/nginx.conf) to include the load balancing configuration.
 
 Restart NGINX:
 
 ```bash
     sudo service nginx restart
-
+```
 Redis for In-Memory Cache
 
-Redis is used for in-memory caching to improve the performance of the application. To use Redis as a caching layer, follow these steps:
+- Redis is used for in-memory caching to improve the performance of the application. To use Redis as a caching layer, follow these steps:
 
     Install Redis:
  
- bash
+```` bash
 sudo apt-get update
 sudo apt-get install redis-server
+````
+
+
 
 * Configure Redis:
 Update the application configuration to use Redis as the caching layer.
@@ -89,6 +92,9 @@ Start Redis Server:
 
 ```bash
     redis-server
+````
+
+
 
 - This README provides an overview of the Task Management Application Backend, user flow, installation instructions, and details about Docker, NGINX for load balancing, and Redis for in-memory caching. 
 ** Feel free to explore the codebase and contribute to the development of this application!
