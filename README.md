@@ -1,7 +1,10 @@
 # voyage-tasks
 
-command frontend:
+### Run development server Front End
+
+```
 npm start
+```
 
 # voyage-tasks
 

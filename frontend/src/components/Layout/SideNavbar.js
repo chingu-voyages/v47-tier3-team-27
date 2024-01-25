@@ -22,7 +22,7 @@ export default function SideNavbar() {
   ];
 
   return (
-    <nav className="h-full w-60 flex border-r border-mediumGreen bg-whiteOff">
+    <nav className="h-full w-1/6 flex border-r border-mediumGreen bg-whiteOff">
       <ul className="h-full w-full">
         {navigation.map((nav, i) => {
           return (

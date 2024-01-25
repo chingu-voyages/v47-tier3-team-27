@@ -1,6 +1,6 @@
 import React from "react";
-import logo from "../assets/LOGO.png";
-import arrowDown from "../assets/arrow-down.png";
+import logo from "../../assets/LOGO.png";
+import arrowDown from "../../assets/arrow-down.png";
 
 export default function Header() {
   return (
