@@ -9,6 +9,7 @@ export default function Layout(props) {
       <section className="h-screen w-full flex flex-row">
         <SideNavBar />
         <props.NameComponent />
+        {/* <component name={props.NameComponent} /> */}
       </section>
     </div>
   );

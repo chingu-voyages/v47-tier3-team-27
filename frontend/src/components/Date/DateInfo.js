@@ -73,7 +73,7 @@ export const renderListDaysPerMonth = () => {
 export const renderListDaysPerWeek = () => {
   const listDaysPerWeek = [];
   for (let i = 1; i <= 7; i++) {
-    // during first loop get the first day of the week, then the following day
+    // during first loop get the first day of the week, then the following days
     let dayWeek = today.getDate() - today.getDay() + i;
     let day = new Date(today.setDate(dayWeek));
     // get the number (0-6) of the day
