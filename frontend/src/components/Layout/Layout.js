@@ -8,8 +8,9 @@ export default function Layout(props) {
       <Header />
       <section className="h-screen w-full flex flex-row">
         <SideNavBar />
-        <props.NameComponent />
-        {/* <component name={props.NameComponent} /> */}
+        <div className="p-8 w-full">
+          <props.NameComponent />
+        </div>
       </section>
     </div>
   );
