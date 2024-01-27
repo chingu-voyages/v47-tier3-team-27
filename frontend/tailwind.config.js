@@ -8,6 +8,7 @@ module.exports = {
       greyGreen: "#8fa8a2",
       lightGreen: "#CBF1E8",
       mediumGreen: "#6BAE8A",
+      mediumGreen10: "rgba(107, 174, 138,0.07)",
       darkGreen: "#004333",
       whiteOff: "#FCFCFD",
     },
