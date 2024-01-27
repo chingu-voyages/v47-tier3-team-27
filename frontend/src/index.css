@@ -14,8 +14,15 @@ input {
   @apply h-9 rounded-md border border-mediumGreen px-4;
 }
 
+select {
+  @apply h-9 rounded-md border border-mediumGreen bg-white appearance-none bg-[url('../src/assets/dropdown-arrow.png')] bg-no-repeat w-full pl-2 bg-right bg-contain;
+}
+
+textarea {
+  @apply h-9 rounded-md border border-mediumGreen px-4 w-full h-2/5;
+}
+
 button {
-  
 }
 
 body {

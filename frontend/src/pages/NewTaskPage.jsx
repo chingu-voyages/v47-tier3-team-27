@@ -1,11 +1,11 @@
 import React from "react";
 import Layout from "../components/Layout";
-import MainDashboard from "../components/MainDashboard";
+import NewTask from "../components/NewTask";
 
-export default function NewTaskage() {
+export default function NewTaskPage() {
   return (
     <>
-      <Layout NameComponent={MainDashboard} />;
+      <Layout NameComponent={NewTask} />;
     </>
   );
 }
