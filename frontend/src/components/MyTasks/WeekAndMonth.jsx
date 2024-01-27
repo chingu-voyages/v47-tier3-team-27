@@ -1,21 +1,8 @@
-import React, { useEffect } from "react";
-import {
-  renderListDaysPerMonth,
-  renderListDaysPerWeek,
-} from "../Date/DateInfo";
+import React from "react";
 
 export default function WeekAndMonth(props) {
-  const { updateVueCalendar } = props;
-  const [dayMonth, setDayMonth] = React.useState([]);
-  const [dayWeek, setDayWeek] = React.useState([]);
-  useEffect(() => {
-    getCalendar();
-  }, []);
-
-  const getCalendar = () => {
-    setDayMonth(renderListDaysPerMonth());
-    setDayWeek(renderListDaysPerWeek());
-  };
+  const { updateVueCalendar, dayMonth, dayWeek } = props;
+  console.log("updateVueCalendar", updateVueCalendar);
 
   console.log(dayMonth);
   console.log(dayWeek);
@@ -23,31 +10,31 @@ export default function WeekAndMonth(props) {
     <section className="flex flex-col w-full">
       {updateVueCalendar === "month" ? (
         <div className="flex flex-col w-full items-end">
-          {/* <div className="flex flex-row w-2/3 bg-lightGreen rounded	justify-evenly">
-            {dayMonth.map((infoDateMonth) => {
+          <div className="flex flex-row w-2/3 bg-lightGreen rounded	justify-evenly">
+            {dayMonth.map((dayInMonth) => {
               return (
                 <div
-                  key={infoDateMonth[0]}
+                  key={dayInMonth[1]}
                   className="flex flex-col m-px py-1 items-center text-xs "
                 >
-                  <p>{infoDateMonth[0]}</p>
-                  <p>{infoDateMonth[1]}</p>
+                  <p>{dayInMonth[0]}</p>
+                  <p>{dayInMonth[1]}</p>
                 </div>
               );
             })}
-          </div> */}
+          </div>
         </div>
       ) : (
         <div className="flex flex-col w-full items-end">
           <div className="flex flex-row w-2/3 bg-lightGreen rounded	justify-evenly">
-            {dayWeek.map((infoDateWeek) => {
+            {dayWeek.map((dayInWeek) => {
               return (
                 <div
-                  key={infoDateWeek[0]}
+                  key={dayInWeek[1]}
                   className="flex flex-col m-px py-1 items-center text-xs "
                 >
-                  <p>{infoDateWeek[0]}</p>
-                  <p>{infoDateWeek[1]}</p>
+                  <p>{dayInWeek[0]}</p>
+                  <p>{dayInWeek[1]}</p>
                 </div>
               );
             })}

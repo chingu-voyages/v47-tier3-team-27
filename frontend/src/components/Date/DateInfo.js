@@ -45,6 +45,7 @@ const numberOfDaysInMonth = new Date(
 
 export const renderListDaysPerMonth = () => {
   const listDaysPerMonth = [];
+  listDaysPerMonth.length = 0;
   for (let i = 1; i <= numberOfDaysInMonth; i++) {
     const getDayOfTheMonthInNumber = new Date(
       currentYear,
@@ -65,22 +66,23 @@ export const renderListDaysPerMonth = () => {
 
 export const renderListDaysPerWeek = () => {
   const listDaysPerWeek = [];
-  listDaysPerWeek.length = 0;
-  let firstDayWeek = today.getDate() - today.getDay() + 1;
-  console.log("listDaysPerWeek", listDaysPerWeek);
+  let resetDate = new Date();
   for (let i = 1; i <= 7; i++) {
-    const nextDate = today.setDate(today.getDate() + 1);
-    // during first loop get the first day of the week, then the following days
-    console.log("today.getDate()", today.getDate());
-    console.log("dayWeek", dayWeek);
-    let day = new Date(today.setDate(dayWeek));
-
+    // during first loop get the first day of the week, then the following day
+    let dayOfTheWeek = resetDate.getDate() - resetDate.getDay() + i;
+    let day = new Date(resetDate.setDate(dayOfTheWeek));
+    console.log("dayOfTheWeek", dayOfTheWeek);
     console.log("day", day);
+
     // get the number (0-6) of the day
     const getDayInNumber = day.getDay();
     const nameDay = FullNameDays[getDayInNumber];
-    listDaysPerWeek.push([nameDay, dayWeek]);
-    console.log("listDaysPerWeek", listDaysPerWeek);
+    console.log("nameDay", nameDay);
+    if (dayOfTheWeek === 32) {
+      dayOfTheWeek = 1;
+    }
+
+    listDaysPerWeek.push([nameDay, dayOfTheWeek]);
   }
   return listDaysPerWeek;
 };
