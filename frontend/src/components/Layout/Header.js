@@ -1,8 +1,8 @@
 import React, { useContext } from "react";
 import { Link } from "react-router-dom";
-import logo from "../assets/LOGO.png";
-import arrowDown from "../assets/arrow-down.png";
-import { UserContext } from "../contexts/UserContext";
+import logo from "../../assets/LOGO.png";
+import arrowDown from "../../assets/arrow-down.png";
+import { UserContext } from "../../contexts/UserContext";
 
 export default function Header() {
   const { user } = useContext(UserContext);
