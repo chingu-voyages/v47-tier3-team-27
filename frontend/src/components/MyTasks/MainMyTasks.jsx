@@ -5,10 +5,10 @@ import ButtonMonthWeek from "./ButtonMonthWeek";
 import { monthName } from "../Date/DateInfo";
 
 export default function MainMyTasks() {
-  const [showWeekCalendar, setShowWeekCalendar] = useState(false);
+  const [updateVueCalendar, setUpdateVueCalendar] = useState("month");
 
-  const updateShowCalendar = () => {
-    setShowWeekCalendar(!showWeekCalendar);
+  const updateShowCalendar = (newState) => {
+    setUpdateVueCalendar(newState);
   };
 
   return (
@@ -17,7 +17,7 @@ export default function MainMyTasks() {
         <h2>{monthName}</h2>
         <ButtonMonthWeek updateShowCalendar={updateShowCalendar} />
       </span>
-      <WeekAndMonth showWeekCalendar={showWeekCalendar} />
+      <WeekAndMonth updateVueCalendar={updateVueCalendar} />
       <ListTasks />
     </section>
   );

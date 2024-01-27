@@ -3,29 +3,29 @@ import React, { useState } from "react";
 export default function ButtonMonthWeek(props) {
   const { updateShowCalendar } = props;
 
-  const [showWeek, setShowWeek] = useState(false);
+  const [changeVue, setChangeVue] = useState("month");
 
-  const updateState = () => {
-    setShowWeek(!showWeek);
-    updateShowCalendar();
+  const updateState = (newState) => {
+    setChangeVue(newState);
+    updateShowCalendar(newState);
   };
 
   return (
     <div className="flex flex-row">
       <button
-        className={`border-2 border-mediumGreen rounded-l rounded-r-none p-1.5 ${
-          !showWeek ? "bg-mediumGreen text-white" : ""
+        className={`border-2 border-mediumGreen rounded-l rounded-r-none p-1.5  ${
+          changeVue === "month" ? "bg-mediumGreen text-white" : ""
         }`}
-        onClick={() => updateState()}
+        onClick={() => updateState("month")}
       >
         Month
       </button>
 
       <button
         className={`border-2 border-mediumGreen rounded-r rounded-l-none p-1.5 ${
-          showWeek ? "bg-mediumGreen text-white" : ""
+          changeVue === "week" ? "bg-mediumGreen text-white" : ""
         }`}
-        onClick={() => updateState()}
+        onClick={() => updateState("week")}
       >
         Week
       </button>

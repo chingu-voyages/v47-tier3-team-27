@@ -54,16 +54,9 @@ export const renderListDaysPerMonth = () => {
 
     // getDay returns the day of the week for this date (ex: 0 for sunday)
     const getDayInName = getDayOfTheMonthInNumber.getDay();
+    const nameDay = InitialNameDays[getDayInName];
 
-    listDaysPerMonth.push(
-      <div
-        key={i}
-        className="flex flex-col w-fit m-px	py-1 items-center bg-lightGreen rounded text-xs"
-      >
-        <p>{InitialNameDays[getDayInName]}</p>
-        <p>{i}</p>
-      </div>
-    );
+    listDaysPerMonth.push([nameDay, i]);
   }
   return listDaysPerMonth;
 };
@@ -72,19 +65,22 @@ export const renderListDaysPerMonth = () => {
 
 export const renderListDaysPerWeek = () => {
   const listDaysPerWeek = [];
+  listDaysPerWeek.length = 0;
+  let firstDayWeek = today.getDate() - today.getDay() + 1;
+  console.log("listDaysPerWeek", listDaysPerWeek);
   for (let i = 1; i <= 7; i++) {
+    const nextDate = today.setDate(today.getDate() + 1);
     // during first loop get the first day of the week, then the following days
-    let dayWeek = today.getDate() - today.getDay() + i;
+    console.log("today.getDate()", today.getDate());
+    console.log("dayWeek", dayWeek);
     let day = new Date(today.setDate(dayWeek));
+
+    console.log("day", day);
     // get the number (0-6) of the day
     const getDayInNumber = day.getDay();
-
-    listDaysPerWeek.push(
-      <div key={i} className="flex flex-col m-px py-1 items-center text-xs ">
-        <p>{FullNameDays[getDayInNumber]}</p>
-        <p>{dayWeek}</p>
-      </div>
-    );
+    const nameDay = FullNameDays[getDayInNumber];
+    listDaysPerWeek.push([nameDay, dayWeek]);
+    console.log("listDaysPerWeek", listDaysPerWeek);
   }
   return listDaysPerWeek;
 };

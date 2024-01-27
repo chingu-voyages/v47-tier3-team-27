@@ -11,7 +11,7 @@ export default function ListTasks() {
 
       results.push(
         <>
-          <SubCategory activityName={getActivityInfo.activityName} />
+          <SubCategory activityName={getActivityInfo.activityName} key={i} />
           <>
             {getActivityInfo.Tasks.map((task, i) => {
               return (
