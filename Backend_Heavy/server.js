@@ -1,7 +1,8 @@
 const express = require("express");
 const { PORT, mongodb_URI } = require("./utils/constant/connections");
-const DailyRoute = require('./route/dailyTask');
 const mongoose = require('mongoose');
+const DailyRoute = require("./route/task_route");
+
 
 
 // Middleware

@@ -1,71 +1,78 @@
+.HomePage {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
 .HomePage section {
-    display: flex;
-    width: 100%;
-    height: 100vh;
+  display: flex;
+  width: 100%;
+  height: 100vh;
 }
 
 .HomePage aside {
-    display: grid;
-    place-items: center;
-    position: relative;
-    width: 25%;
-    padding: 2rem;
+  display: grid;
+  place-items: center;
+  position: relative;
+  width: 25%;
+  padding: 2rem;
 }
 .HomePage .plant {
-    position: absolute;
-    bottom: -10px;
-    right: -75px;
+  position: absolute;
+  bottom: -10px;
+  right: -75px;
 }
 
 .HomePage__aside--wrapper {
-    display: flex;
-    flex-direction: column;
-    justify-content: space-around;
-    height: 100%;
-    padding-block: 10%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  height: 100%;
+  padding-block: 10%;
 }
 .HomePage main {
-    width: 75%;
-    padding: 4.375rem;
-    background-color: var(--clr-light-green);
+  width: 75%;
+  padding: 4.375rem;
+  background-color: var(--clr-light-green);
 }
 
 .HomePage main p {
-    max-width: 700px;
+  max-width: 700px;
 }
 .HomePage input {
-    display: block;
-    padding-inline: 1rem;
-    padding-block: 0.4rem;
+  display: block;
+  padding-inline: 1rem;
+  padding-block: 0.4rem;
 }
 
 .HomePage button {
-    display: block;
-    width: 100%;
-    margin-bottom: 1.5rem;
+  display: block;
+  width: 100%;
+  margin-bottom: 1.5rem;
 }
 
-.HomePage .or {
-    color: var(--clr-grey-green);
+.or {
+  color: var(--clr-grey-green);
 }
 
-.HomePage .login-icons {
-    display: flex;
-    justify-content: center;
-    gap: 1rem;
-    margin-top: 2rem;
+.login-icons {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  margin-top: 2rem;
 }
 
-.HomePage .login-icons img {
-    height: 2.2rem;
+.login-icons img {
+  height: 2.2rem;
 }
 
-.HomePage .checklist-img {
-    text-align: right;
-    position: absolute;
-    bottom: 0;
-    right: 0;
+.checklist-img {
+  text-align: right;
+  position: absolute;
+  bottom: 0;
+  right: 0;
 }
-.HomePage .checklist-img img {
-    height: 55vh;
+.checklist-img img {
+  height: 55vh;
 }

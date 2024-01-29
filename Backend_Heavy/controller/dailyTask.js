@@ -1,7 +1,7 @@
 const { User } = require("../model/dailyTask_model")
 
 
-const  dailyTask = async (req, res) => {
+const  new_Task = async (req, res) => {
     try {
         const data = await User.find({})
         res.send({
@@ -16,10 +16,6 @@ const  dailyTask = async (req, res) => {
    
 }
 
-
-//@Route - '/api/v1/24/' 
-//@desc - 
-//@Method - GET
 
 
 module.exports = {
