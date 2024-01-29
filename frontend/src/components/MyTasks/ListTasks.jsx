@@ -3,7 +3,9 @@ import data from "../../data/tasks-example.json";
 import Task from "./Task";
 import SubCategory from "./SubCategory";
 
-export default function ListTasks() {
+export default function ListTasks(props) {
+  const { dayWeek, dayMonth, calendarVue } = props;
+
   const getActivityTypes = (activityTypes) => {
     let results = [];
     for (let i = 0; i < activityTypes.length; i++) {
@@ -15,7 +17,14 @@ export default function ListTasks() {
           <>
             {getActivityInfo.Tasks.map((task, i) => {
               return (
-                <Task key={i} taskName={task.taskName} taskDays={task.days} />
+                <Task
+                  key={i}
+                  taskName={task.taskName}
+                  taskDays={task.days}
+                  dayWeek={dayWeek}
+                  dayMonth={dayMonth}
+                  calendarVue={calendarVue}
+                />
               );
             })}
           </>
@@ -26,9 +35,9 @@ export default function ListTasks() {
   };
 
   return (
-    <section className="w-1/3">
+    <section className="w-full">
       {data.map((category, i) => (
-        <div>
+        <div className="w-full">
           <h5 key={i} className="text-darkGreen">
             {category.categoryName}
           </h5>

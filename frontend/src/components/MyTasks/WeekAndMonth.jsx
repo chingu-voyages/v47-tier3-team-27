@@ -2,10 +2,7 @@ import React from "react";
 
 export default function WeekAndMonth(props) {
   const { updateVueCalendar, dayMonth, dayWeek } = props;
-  console.log("updateVueCalendar", updateVueCalendar);
 
-  console.log(dayMonth);
-  console.log(dayWeek);
   return (
     <section className="flex flex-col w-full">
       {updateVueCalendar === "month" ? (

@@ -27,7 +27,7 @@ export default function MainMyTasks() {
   };
 
   return (
-    <section className="flex flex-col w-5/6">
+    <section className="flex flex-col w-full">
       <span className="flex flex-row justify-between">
         <h2>{monthName}</h2>
         <ButtonMonthWeek updateShowCalendar={updateShowCalendar} />
@@ -37,7 +37,11 @@ export default function MainMyTasks() {
         dayWeek={dayWeek}
         dayMonth={dayMonth}
       />
-      <ListTasks />
+      <ListTasks
+        calendarVue={updateVueCalendar}
+        dayWeek={dayWeek}
+        dayMonth={dayMonth}
+      />
     </section>
   );
 }

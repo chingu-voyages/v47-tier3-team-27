@@ -19,7 +19,7 @@ const listMonths = [
   "December",
 ];
 
-const InitialNameDays = ["S", "M", "T", "W", "Th", "F", "Sa"];
+const InitialNameDays = ["Su", "Mo", "Tu", "We", "Th", "Fr", "Sa"];
 
 const FullNameDays = [
   "Sunday",
@@ -71,13 +71,10 @@ export const renderListDaysPerWeek = () => {
     // during first loop get the first day of the week, then the following day
     let dayOfTheWeek = resetDate.getDate() - resetDate.getDay() + i;
     let day = new Date(resetDate.setDate(dayOfTheWeek));
-    console.log("dayOfTheWeek", dayOfTheWeek);
-    console.log("day", day);
 
     // get the number (0-6) of the day
     const getDayInNumber = day.getDay();
     const nameDay = FullNameDays[getDayInNumber];
-    console.log("nameDay", nameDay);
     if (dayOfTheWeek === 32) {
       dayOfTheWeek = 1;
     }
