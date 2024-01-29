@@ -37,8 +37,7 @@ const all_task = async (req, res) => {
         console.error(error);
         res.status(500).json({ error: 'Internal Server Error' });
     }
-}
-
+};
 const search_label = async (req, res) => {
     try {
       const { label } = req.params;
