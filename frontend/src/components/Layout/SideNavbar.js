@@ -1,7 +1,7 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
-import github from "../assets/github.png";
-import externalLink from "../assets/external-link.png";
+import github from "../../assets/github.png";
+import externalLink from "../../assets/external-link.png";
 
 export default function SideNavbar() {
   const navigation = [
