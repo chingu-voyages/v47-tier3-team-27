@@ -14,12 +14,12 @@ export default function HomePage() {
     <div className="HomePage">
       <section>
         {/* Left column */}
-        <aside>
-          <div className="plant">
+        <aside className="w-full lg:w-[25%]">
+          <div className="plant hidden lg:block">
             <img src={plant} alt="Task Zen design element" />
           </div>
 
-          <div className="HomePage__aside--wrapper">
+          <div className="HomePage__aside--wrapper w-full">
             <Logo />
             <form action="">
               <label htmlFor="">Username / Email:</label>
@@ -51,7 +51,7 @@ export default function HomePage() {
         </aside>
 
         {/* Right column */}
-        <main>
+        <main className="lg:block hidden">
           <img src={circles} alt="Task Zen design element" />
           <h1>Task Zen</h1>
           <p>

@@ -1,7 +1,7 @@
 import React from "react";
 import Header from "./Header";
 import SideNavBar from "./SideNavbar";
-import SideNavbarMobile from "./SideNavbarMobile";
+import SideNavbarMobile from "./Layout/SideNavbarMobile";
 
 export default function Layout(props) {
   return (

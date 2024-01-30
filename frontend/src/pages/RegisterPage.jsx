@@ -13,7 +13,7 @@ export default function RegisterPage() {
     <div className="min-h-screen">
       <section className="w-full h-screen flex">
         {/* Left column */}
-        <aside className="w-[25%] py-4 px-8 space-y-24 bg-lightGreen">
+        <aside className="lg:block hidden w-[25%] py-4 px-8 space-y-24 bg-lightGreen">
           <div className="flex justify-center gap-6">
             <img src={circles} alt="" srcset="" />
             <h2 className="leading-[1]">
@@ -32,10 +32,10 @@ export default function RegisterPage() {
         </aside>
 
         {/* Right column */}
-        <main className="w-[75%] flex flex-col justify-around">
+        <main className="w-full lg:w-[75%]  flex flex-col justify-around">
           <Logo />
 
-          <form action="" className="w-[30%] mx-auto">
+          <form action="" className="w-full px-6 lg:w-[30%] mx-auto">
             <label className="" htmlFor="">
               Username / Email:
             </label>
