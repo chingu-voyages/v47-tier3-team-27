@@ -24,7 +24,7 @@ export default function SideNavbar() {
   ];
 
   return (
-    <nav className="h-full w-60 flex flex-col justify-between border-r border-mediumGreen bg-whiteOff">
+    <nav className="h-full w-60 hidden lg:flex flex-col justify-between border-r border-mediumGreen bg-whiteOff fixed z-10 pt-24">
       <ul className="flex flex-col">
         {navigation.map((nav, i) => (
           <li className="h-16 mt-10" key={i}>
@@ -42,7 +42,7 @@ export default function SideNavbar() {
           </li>
         ))}
       </ul>
-      <div className="flex items-center justify-center mt-10 cursor-pointer">
+      <div className="flex items-center justify-center cursor-pointer">
         <a
           href="https://github.com/chingu-voyages/v47-tier3-team-27"
           target="_blank"

@@ -8,7 +8,7 @@ export default function Header() {
   const { user } = useContext(UserContext);
 
   return (
-    <div className="w-full h-24 flex flex-row justify-between shadow-md bg-whiteOff z-10	">
+    <div className="w-full h-24 flex flex-row justify-between shadow-md bg-whiteOff z-20 fixed">
       <span className="h-full w-24 flex justify-center items-center">
         <Link to="/">
           {" "}
