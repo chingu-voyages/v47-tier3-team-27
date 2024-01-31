@@ -11,9 +11,9 @@ export default function ButtonMonthWeek(props) {
   };
 
   return (
-    <div className="flex flex-row">
+    <div className="flex flex-row items-center">
       <button
-        className={`border-2 border-mediumGreen rounded-l rounded-r-none p-1.5  ${
+        className={`border-2 border-mediumGreen rounded-l rounded-r-none p-1.5 h-11 ${
           changeVue === "month" ? "bg-mediumGreen text-white" : ""
         }`}
         onClick={() => updateState("month")}
@@ -22,7 +22,7 @@ export default function ButtonMonthWeek(props) {
       </button>
 
       <button
-        className={`border-2 border-mediumGreen rounded-r rounded-l-none p-1.5 ${
+        className={`border-2 border-mediumGreen rounded-r rounded-l-none p-1.5 h-11 ${
           changeVue === "week" ? "bg-mediumGreen text-white" : ""
         }`}
         onClick={() => updateState("week")}

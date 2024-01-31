@@ -17,14 +17,16 @@ export default function ListTasks(props) {
           <>
             {getActivityInfo.Tasks.map((task, i) => {
               return (
-                <Task
-                  key={i}
-                  taskName={task.taskName}
-                  taskDays={task.days}
-                  dayWeek={dayWeek}
-                  dayMonth={dayMonth}
-                  calendarVue={calendarVue}
-                />
+                <div className="border-b-2 border-lightGreen">
+                  <Task
+                    key={i}
+                    taskName={task.taskName}
+                    taskDays={task.days}
+                    dayWeek={dayWeek}
+                    dayMonth={dayMonth}
+                    calendarVue={calendarVue}
+                  />
+                </div>
               );
             })}
           </>
@@ -38,7 +40,7 @@ export default function ListTasks(props) {
     <section className="w-full">
       {data.map((category, i) => (
         <div className="w-full">
-          <h5 key={i} className="text-darkGreen">
+          <h5 key={i} className="text-darkGreen font-semibold mt-3">
             {category.categoryName}
           </h5>
           <>{getActivityTypes(category.activityTypes)}</>
