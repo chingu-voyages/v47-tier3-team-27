@@ -1,0 +1,24 @@
+# Node.js
+node_modules/
+
+# Output of the 'npm pack' command
+*.tgz
+
+# TypeScript
+*.tsbuildinfo
+*.tsk
+
+# Visual Studio Code
+.vscode/
+
+# JetBrains IDEs
+.idea/
+
+# Compiled JavaScript
+dist/
+
+# macOS
+.DS_Store
+
+# Windows
+Thumbs.db
