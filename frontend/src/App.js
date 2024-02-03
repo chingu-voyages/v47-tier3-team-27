@@ -23,6 +23,7 @@ function App() {
             <Route path="/mytasks" element={<MyTasksPage />} />
             <Route path="/newtask" element={<NewTaskPage />} />
             <Route path="/invite" element={<InvitePage />} />
+
           </Routes>
         </BrowserRouter>
       </UserProvider>

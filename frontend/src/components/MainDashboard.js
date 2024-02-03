@@ -2,7 +2,7 @@ import React from "react";
 import image from "../assets/Notebook-bro.png";
 import linesTop from "../assets/greenLinesTop.png";
 import linesBottom from "../assets/greenLinesBottom.png";
-
+import Log from "./Log";
 
 export default function MainDashboard() {
   return (
@@ -27,35 +27,11 @@ export default function MainDashboard() {
           <p className="uppercase text-lg">Task of the day</p>
           <div className="mt-4 grid gap-4 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
             <article className="p-4 border border-solid border-mediumGreen shadow-md rounded-xl h-[150px] hover:bg-mediumGreen10">
-              <p className="font-medium">Task name</p>
+              <div className="flex justify-between align-baseline pb-2"><p className="font-medium">Task name</p><Log/></div> 
               <hr className="text-gray-400" />
               <p className="task-description mt-2 text-sm">Lorem ipsum dolor sit amet consectetur adipisicing elit. Quia, accusantium atque, ipsum unde laudantium commodi sit alias, aliquam repellendus distinctio minima. Rerum aliquid voluptatibus nobis modi mollitia nesciunt, culpa laboriosam.</p>
             </article>
-            <article className="p-4 border border-solid border-mediumGreen shadow-md rounded-xl h-[150px] hover:bg-mediumGreen10">
-              <p className="font-medium">Task name</p>
-              <hr className="text-gray-400" />
-              <p className="mt-2 text-sm">Task description</p>
-            </article>
-            <article className="p-4 border border-solid border-mediumGreen shadow-md rounded-xl h-[150px] hover:bg-mediumGreen10">
-              <p className="font-medium">Task name</p>
-              <hr className="text-gray-400" />
-              <p className="mt-2 text-sm">Task description</p>
-            </article>
-            <article className="p-4 border border-solid border-mediumGreen shadow-md rounded-xl h-[150px] hover:bg-mediumGreen10">
-              <p className="font-medium">Task name</p>
-              <hr className="text-gray-400" />
-              <p className="mt-2 text-sm">Task description</p>
-            </article>
-            <article className="p-4 border border-solid border-mediumGreen shadow-md rounded-xl h-[150px] hover:bg-mediumGreen10">
-              <p className="font-medium">Task name</p>
-              <hr className="text-gray-400" />
-              <p className="mt-2 text-sm">Task description</p>
-            </article>
-            <article className="p-4 border border-solid border-mediumGreen shadow-md rounded-xl h-[150px] hover:bg-mediumGreen10">
-              <p className="font-medium">Task name</p>
-              <hr className="text-gray-400" />
-              <p className="mt-2 text-sm">Task description</p>
-            </article>
+           
           </div>
         </div>
         <div className="pt-8 px-8 mt-4">
