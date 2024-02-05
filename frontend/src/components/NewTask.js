@@ -20,27 +20,30 @@ export default function NewTask() {
   };
 
   return (
-    <div className="flex flex-col items-center ml-20">
+    <div className="flex flex-col items-center md:ml-20">
       <form className="w-full max-w-screen-lg">
         <div className="flex flex-wrap -mx-4">
           {/* Left Column */}
           <div className="w-full md:w-1/2 px-4 md:px-8 lg:px-12">
             <label htmlFor="task">Task</label>
-            <input type="text" className="block w-3/4 mb-4" />
+            <input type="text" className="block w-full md:w-3/4 mb-4" />
             <label htmlFor="category">Category</label>
-            <select id="category" className="block w-3/4 mb-4">
+            <select id="category" className="block w-full md:w-3/4 mb-4">
               <option value="" disabled selected>
                 Select an existing one
               </option>
             </select>
             <label htmlFor="sub-category">Sub-Category</label>
-            <select id="sub-category" className="block w-3/4 mb-4">
+            <select id="sub-category" className="block w-full md:w-3/4 mb-4">
               <option value="" disabled selected>
                 Select an existing one
               </option>
             </select>
             <label htmlFor="priority">Priority</label>
-            <select id="priority" className="block w-3/4 mb-4"></select>
+            <select
+              id="priority"
+              className="block w-full md:w-3/4 mb-4"
+            ></select>
             <label htmlFor="date" className="mt-10">
               <input
                 type="checkbox"
@@ -55,7 +58,7 @@ export default function NewTask() {
               type="date"
               id="date"
               disabled={isSpecificDate}
-              className="mb-4 w-3/4"
+              className="mb-4 w-full md:w-3/4"
             />
             <label htmlFor="email" className="mt-10">
               Who will work with you on this task?
@@ -75,7 +78,10 @@ export default function NewTask() {
           {/* Right Column */}
           <div className="w-full md:w-1/2 px-4 md:px-8 lg:px-12">
             <label htmlFor="description">Description</label>
-            <textarea id="description" className="block w-3/4"></textarea>
+            <textarea
+              id="description"
+              className="block w-full md:w-3/4"
+            ></textarea>
             <label htmlFor="recurrence" className="mt-24">
               <input
                 type="checkbox"
