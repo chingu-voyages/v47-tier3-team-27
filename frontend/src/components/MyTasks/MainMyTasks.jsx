@@ -28,10 +28,10 @@ export default function MainMyTasks() {
 
   return (
     <section className="flex flex-col w-full">
-      <span className="flex flex-row justify-between">
+      <div className="flex flex-row justify-between">
         <h2>{monthName}</h2>
         <ButtonMonthWeek updateShowCalendar={updateShowCalendar} />
-      </span>
+      </div>
       <WeekAndMonth
         updateVueCalendar={updateVueCalendar}
         dayWeek={dayWeek}

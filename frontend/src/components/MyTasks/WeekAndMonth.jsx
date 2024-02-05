@@ -7,15 +7,15 @@ export default function WeekAndMonth(props) {
     <section className="flex flex-col w-full">
       {updateVueCalendar === "month" ? (
         <div className="flex flex-col w-full items-end">
-          <div className="flex flex-row w-2/3 bg-lightGreen rounded	justify-evenly">
+          <div className="flex flex-row w-2/3 h-12 bg-lightGreen rounded	justify-between items-center">
             {dayMonth.map((dayInMonth) => {
               return (
                 <div
                   key={dayInMonth[1]}
                   className="flex flex-col m-px py-1 items-center text-xs "
                 >
-                  <p>{dayInMonth[0]}</p>
-                  <p>{dayInMonth[1]}</p>
+                  <p className="text-xs">{dayInMonth[0]}</p>
+                  <p className="text-xs">{dayInMonth[1]}</p>
                 </div>
               );
             })}
@@ -23,15 +23,15 @@ export default function WeekAndMonth(props) {
         </div>
       ) : (
         <div className="flex flex-col w-full items-end">
-          <div className="flex flex-row w-2/3 bg-lightGreen rounded	justify-evenly">
+          <div className="grid grid-cols-7 w-2/3 h-12 bg-lightGreen rounded">
             {dayWeek.map((dayInWeek) => {
               return (
                 <div
                   key={dayInWeek[1]}
-                  className="flex flex-col m-px py-1 items-center text-xs "
+                  className="flex flex-col m-px py-1 items-center text-xs"
                 >
-                  <p>{dayInWeek[0]}</p>
-                  <p>{dayInWeek[1]}</p>
+                  <p className="text-sm">{dayInWeek[0]}</p>
+                  <p className="text-sm">{dayInWeek[1]}</p>
                 </div>
               );
             })}
