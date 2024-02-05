@@ -159,11 +159,14 @@ label {
   text-align: center;
 }
 
-
 .task-description {
-    display: -webkit-box; 
-    -webkit-box-orient: vertical; 
-    -webkit-line-clamp: 4; 
-    overflow: hidden; 
-    text-overflow: ellipsis; 
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 4;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.FourOhFour {
+  height: 100vh;
 }
