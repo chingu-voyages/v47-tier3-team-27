@@ -1,8 +1,9 @@
 const express = require("express");
 const connectMongoDB = require("./config/db"); // require DB connection
 const dotenv = require("dotenv");
-const cors = require('cors')
-const userRoutes = require('./routes/userRoutes')
+const cors = require("cors");
+const userRoutes = require("./routes/userRoutes");
+const authRoutes = require("./routes/authRoutes");
 
 connectMongoDB();
 
@@ -13,9 +14,10 @@ app.use(express.json());
 
 app.use(cors());
 
-
 //api routes
-app.use('/api/users', userRoutes)
+// "api/auth/signup"
+app.use("/api", authRoutes);
+// app.use("/api/users", userRoutes);
 
 const port = process.env.PORT || 5000;
 
