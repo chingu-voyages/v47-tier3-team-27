@@ -1,6 +1,6 @@
 import React from "react";
 import Pen from "../../assets/pen.png";
-import Text from "../../assets/text.png";
+import Log from "../Log";
 
 export default function Task(props) {
   const { taskName, taskDays, dayWeek, dayMonth, calendarVue } = props;
@@ -92,9 +92,7 @@ export default function Task(props) {
           <button className="border-0">
             <img src={Pen} className="w-5	h-5" alt="update task" />
           </button>
-          <button className="border-0">
-            <img src={Text} className="w-5	h-5" alt="view history task" />
-          </button>
+          <Log />
         </div>
       </div>
       {calendarVue === "week" ? (
