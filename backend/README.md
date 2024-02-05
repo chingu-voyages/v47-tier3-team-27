@@ -59,4 +59,4 @@ npm run dev
 3. **Sign out: Log out of an account**
    http://localhost:5000/api/signout
    POST request
-   Takes token
+   Takes token, content-type
