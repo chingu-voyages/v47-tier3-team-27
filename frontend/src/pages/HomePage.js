@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import "../styles/HomePage.css";
 import circles from "../assets/3circles.svg";
 import plant from "../assets/plant.png";
@@ -14,6 +14,7 @@ import SignForm from "../components/SignForm";
 export default function HomePage() {
   const handleSignIn = async (infoUser) => {
     try {
+      console.log("trying");
       const response = await authAPI.signIn(
         infoUser.username,
         infoUser.email,

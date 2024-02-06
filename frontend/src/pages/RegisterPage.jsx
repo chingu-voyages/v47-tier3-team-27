@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import circles from "../assets/3circles.svg";
 import checklist from "../assets/checklist.svg";
 import Logo from "../components/Logo";
