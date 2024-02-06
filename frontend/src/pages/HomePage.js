@@ -9,9 +9,26 @@ import gmail from "../assets/gmail.png";
 import { Link } from "react-router-dom";
 import Logo from "../components/Logo";
 import authAPI from "../services/authAPI";
+import SignForm from "../components/SignForm";
 
 export default function HomePage() {
-  const handleSignIn = () => {};
+  const handleSignIn = async (infoUser) => {
+    try {
+      console.log("trying");
+      const response = await authAPI.signIn(
+        infoUser.username,
+        infoUser.email,
+        infoUser.password
+      );
+      if (response) {
+        // will need to add redirection to dashboard
+        console.log("user logged in");
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   return (
     <div className="HomePage">
       <section>
@@ -23,20 +40,14 @@ export default function HomePage() {
 
           <div className="HomePage__aside--wrapper w-full">
             <Logo />
-            <form action="">
-              <label htmlFor="">Username / Email:</label>
-              <input type="text" placeholder="enter username/email" />
 
-              <label htmlFor="">Password:</label>
-              <input type="password" placeholder="enter password" />
+            <SignForm
+              handleSubmit={handleSignIn}
+              buttonOneName={"Login"}
+              buttonTwoName={"Register"}
+              navigationButtonTwo={`/register`}
+            />
 
-              <button className="btn-accent mt-12" onClick={handleSignIn()}>
-                Login
-              </button>
-            </form>
-            <Link to="/register">
-              <button className="btn-white">Register</button>
-            </Link>
             <div>
               <p className="or center">-------- or --------</p>
               <div className="login-icons">
