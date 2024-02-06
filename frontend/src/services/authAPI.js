@@ -1,9 +1,7 @@
 const API_URL = process.env.REACT_APP_API_URL;
-// API_URL encouters a bug, it redirects to localhost3000 instead of 5000
 
 async function signUp(username, email, password) {
-  console.log("username, email, password", username, email, password);
-  const response = await fetch("http://localhost:5000/api/auth/signup", {
+  const response = await fetch(`${API_URL}/auth/signup`, {
     method: "POST",
     body: JSON.stringify({ username, email, password }),
     headers: {
