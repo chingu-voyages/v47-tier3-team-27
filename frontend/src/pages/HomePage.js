@@ -8,8 +8,10 @@ import twitter from "../assets/twitter.png";
 import gmail from "../assets/gmail.png";
 import { Link } from "react-router-dom";
 import Logo from "../components/Logo";
+import authAPI from "../services/authAPI";
 
 export default function HomePage() {
+  const handleSignIn = () => {};
   return (
     <div className="HomePage">
       <section>
@@ -28,7 +30,9 @@ export default function HomePage() {
               <label htmlFor="">Password:</label>
               <input type="password" placeholder="enter password" />
 
-              <button className="btn-accent mt-12">Login</button>
+              <button className="btn-accent mt-12" onClick={handleSignIn()}>
+                Login
+              </button>
             </form>
             <Link to="/register">
               <button className="btn-white">Register</button>
