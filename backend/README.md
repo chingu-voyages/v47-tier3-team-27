@@ -60,3 +60,26 @@ npm run dev
    http://localhost:5000/api/signout
    POST request
    Takes token, content-type
+
+4. **Create Task: Add a New Task**
+   http://localhost:5000/api/tasks
+   POST request
+   Takes task details including title, description, category, sub-category, recurrence, and invited users.
+
+5. **View My Tasks: Retrieve User's Tasks**
+   http://localhost:5000/api/tasks/:userId
+   GET request
+   Takes user ID
+   Returns list of tasks associated with the user.
+
+6. **Update Task: Edit Task Details**
+   http://localhost:5000/api/tasks/:taskId
+   PATCH request
+   Takes task ID, updated task details
+   Returns updated details of the task.
+
+7. **Delete Task: Remove a Task**
+   http://localhost:5000/api/tasks/:taskId
+   DELETE request
+   Takes task ID
+   Returns success message upon successful deletion.
