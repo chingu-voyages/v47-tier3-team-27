@@ -1,6 +1,7 @@
 import React from "react";
 import Pen from "../../assets/pen.png";
 import Log from "../Log";
+import Invite from "../Invite";
 
 export default function Task(props) {
   const { taskName, taskDays, dayWeek, dayMonth, calendarVue } = props;
@@ -93,6 +94,7 @@ export default function Task(props) {
             <img src={Pen} className="w-5	h-5" alt="update task" />
           </button>
           <Log />
+          <Invite />
         </div>
       </div>
       {calendarVue === "week" ? (
