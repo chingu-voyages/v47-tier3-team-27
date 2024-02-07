@@ -1,25 +1,11 @@
 const Task = require("../models/Task");
 
-async function getTasks(req, res) {
+async function getTasksByUserId(req, res) {
   try {
-    const tasks = await Task.find();
+    const userId = req.params.userId;
+    const tasks = await Task.find({ users: userId });
+
     res.status(200).send(tasks);
-  } catch (error) {
-    console.log(error);
-    res.status(500).send({ error: "Internal Server Error" });
-  }
-}
-
-async function getTaskById(req, res) {
-  try {
-    const taskId = req.params.taskId;
-    const task = await Task.findById(taskId);
-
-    if (!task) {
-      return res.status(404).send({ error: "Task not found" });
-    }
-
-    res.status(200).send(task);
   } catch (error) {
     console.log(error);
     res.status(500).send({ error: "Internal Server Error" });
@@ -98,4 +84,9 @@ async function deleteTask(req, res) {
   }
 }
 
-module.exports = { getTasks, getTaskById, addTask, editTask, deleteTask };
+module.exports = {
+  addTask,
+  editTask,
+  deleteTask,
+  getTasksByUserId,
+};

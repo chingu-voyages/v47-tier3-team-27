@@ -1,14 +1,12 @@
 const taskRouter = require("express").Router();
 const {
-  getTasks,
+  getTasksByUserId,
   addTask,
   editTask,
   deleteTask,
-  getTaskById,
 } = require("../controllers/taskController");
 
-taskRouter.get("/", getTasks);
-taskRouter.get("/:taskId", getTaskById);
+taskRouter.get("/:userId", getTasksByUserId);
 taskRouter.post("/", addTask);
 taskRouter.patch("/:taskId", editTask);
 taskRouter.delete("/:taskId", deleteTask);
