@@ -20,7 +20,7 @@ app.use(cors());
 app.use("/api", authRoutes);
 // app.use("/api/users", userRoutes);
 
-app.use("/tasks", taskRoutes);
+app.use("/api/tasks", taskRoutes);
 
 const port = process.env.PORT || 5000;
 
