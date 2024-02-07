@@ -5,6 +5,7 @@ const cors = require("cors");
 const authRoutes = require("./routes/authRoutes");
 const categoryRoutes = require("./routes/categoryRoutes");
 const subcategoryRoutes = require("./routes/subcategoryRoutes");
+const taskRoutes = require("./routes/taskRoutes");
 
 connectMongoDB();
 
@@ -20,6 +21,8 @@ app.use(cors());
 app.use("/api", authRoutes);
 app.use("/api/categories", categoryRoutes);
 app.use("/api/subcategories", subcategoryRoutes);
+app.use("/api/tasks", taskRoutes);
+
 // app.use("/api/users", userRoutes);
 
 const port = process.env.PORT || 5000;
