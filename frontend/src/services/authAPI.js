@@ -35,6 +35,7 @@ async function signIn(username, email, password) {
     const data = await response.json();
     const token = data.token;
     sessionStorage.setItem("token", token);
+    console.log("if token, all good", token);
     return true;
   } else {
     // Registration failed, handle errors

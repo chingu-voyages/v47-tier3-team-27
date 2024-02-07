@@ -1,0 +1,25 @@
+{
+  "name": "v47-tier3-team-27",
+  "version": "1.0.0",
+  "description": "```\r npm start\r ```",
+  "main": "index.js",
+  "directories": {
+    "doc": "docs"
+  },  
+  "scripts": {
+    "server": "npm run dev --prefix backend",
+    "client": "npm start --prefix frontend",
+    "dev": "concurrently \"npm run server\" \"npm run client\""
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/chingu-voyages/v47-tier3-team-27.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/chingu-voyages/v47-tier3-team-27/issues"
+  },
+  "homepage": "https://github.com/chingu-voyages/v47-tier3-team-27#readme"
+}
