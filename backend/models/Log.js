@@ -6,6 +6,8 @@ const Log = new Schema ({
     taskid: { type: Schema.Types.ObjectId, ref: 'Task'},
     date: { type: Date },
     logDescription: { type: String }
+}, {
+    timestamps: true,
 })
 
 
