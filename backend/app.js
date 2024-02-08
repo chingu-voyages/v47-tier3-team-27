@@ -6,6 +6,7 @@ const authRoutes = require("./routes/authRoutes");
 const categoryRoutes = require("./routes/categoryRoutes");
 const subcategoryRoutes = require("./routes/subcategoryRoutes");
 const taskRoutes = require("./routes/taskRoutes");
+const logRoutes = require("./routes/logRoutes");
 
 connectMongoDB();
 
@@ -22,6 +23,7 @@ app.use("/api", authRoutes);
 app.use("/api/categories", categoryRoutes);
 app.use("/api/subcategories", subcategoryRoutes);
 app.use("/api/tasks", taskRoutes);
+app.use("/api/logs", logRoutes);
 
 // app.use("/api/users", userRoutes);
 
