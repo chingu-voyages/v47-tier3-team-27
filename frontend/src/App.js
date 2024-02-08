@@ -12,6 +12,7 @@ import InvitePage from "./pages/InvitePage";
 import { UserProvider } from "./contexts/UserContext";
 import FourOhFour from "./pages/FourOhFour";
 
+
 function App() {
   return (
     <div className="">

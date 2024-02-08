@@ -7,6 +7,8 @@ const User = new Schema({
   hashedPassword: { type: String, required: true },
   tasks: [{ type: Schema.Types.ObjectId, ref: "Task" }],
   image: { type: String },
+}, {
+  timestamps: true,
 });
 
 module.exports = mongoose.model("User", User);
