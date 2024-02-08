@@ -35,6 +35,8 @@ async function signUp(req, res) {
       allowInsecureKeySizes: true,
       expiresIn: 86400, // 24 hours
     });
+    console.log("token signup", token);
+
     return res.status(201).send({ token: token });
   } catch (error) {
     res.status(500).send({ message: error });
