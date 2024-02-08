@@ -46,6 +46,8 @@ npm run dev
 
 ### End Points Back End
 
+**User Authentification**
+
 1. **Sign in: Create an account**
    http://localhost:5000/api/auth/signup
    POST request
@@ -60,6 +62,8 @@ npm run dev
    http://localhost:5000/api/signout
    POST request
    Takes token, content-type
+
+**Task**
 
 4. **Create Task: Add a New Task**
    http://localhost:5000/api/tasks
@@ -83,3 +87,29 @@ npm run dev
    DELETE request
    Takes task ID
    Returns success message upon successful deletion.
+
+**Task Log**
+
+8. **Add Task Log**
+   http://localhost:5000/api/logs/add
+   POST request
+   Takes:
+   Body: userId, logDescription
+   Params: taskid
+
+9. **Edit Task Log**
+   http://localhost:5000/api/logs/:logid/edit
+   PATCH request
+   Takes:
+   Body: logDescription
+   Params: logid
+
+10. **Delete Task Log**
+    http://localhost:5000/api/logs/:logid/delete
+    DELETE request
+    Takes log id
+
+11. **Display List of logs by task**
+    http://localhost:5000/api/logs/:taskid/all
+    GET request
+    Takes task id
