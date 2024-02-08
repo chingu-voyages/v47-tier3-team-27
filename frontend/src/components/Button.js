@@ -1,10 +1,17 @@
 import React from "react";
 
-export default function Button({ children, className, type = "primary" }) {
+export default function Button({
+  children,
+  className,
+  color = "primary",
+  ...props
+}) {
+  console.log(props);
   return (
     <button
+      {...props}
       className={`${
-        type === "primary" ? "btn-accent" : "btn-white"
+        color === "primary" ? "btn-accent" : "btn-white"
       } block w-full ${className}`}
     >
       {children}
