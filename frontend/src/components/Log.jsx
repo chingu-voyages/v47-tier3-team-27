@@ -16,18 +16,23 @@ const style = {
   boxShadow: 24,
 };
 
-export default function Log({taskId}) {
+export default function Log({ taskId }) {
   const [open, setOpen] = useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
 
   return (
-    <div className="inline-block">
-      <div className="cursor-pointer max-w-7" onClick={handleOpen}>
+    <div>
+      <div
+        className="text-sm p-2 hover:bg-lightGreen flex items-center gap-2"
+        onClick={handleOpen}
+      >
         <img
           src={Text}
+          className="w-4	h-4"
           alt="click to open a log of this taks's changes history"
         />
+        <span>View log</span>
       </div>
       <Modal
         open={open}

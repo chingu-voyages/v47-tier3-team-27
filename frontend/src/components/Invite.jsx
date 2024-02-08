@@ -23,13 +23,13 @@ export default function Invite({ taskId }) {
   const handleClose = () => setOpen(false);
 
   return (
-    <div className="inline-block">
-      <div className="cursor-pointer max-w-7" onClick={handleOpen}>
-        <img
-          className="w-5 h-5"
-          src={InviteUser}
-          alt="click to open a log of this taks's changes history"
-        />
+    <div>
+      <div
+        className="text-sm p-2 hover:bg-lightGreen flex items-center gap-2"
+        onClick={handleOpen}
+      >
+        <img src={InviteUser} className="w-4	h-4" />
+        <span>Invite</span>
       </div>
       <Modal
         open={open}

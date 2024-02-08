@@ -1,10 +1,14 @@
-import React from "react";
+import React, { useState } from "react";
 import Pen from "../../assets/pen.png";
+import More from "../../assets/more.png";
+
 import Log from "../Log";
 import Invite from "../Invite";
 
 export default function Task(props) {
   const { taskName, taskDays, dayWeek, dayMonth, calendarVue } = props;
+
+  const [show, setShow] = useState(false);
 
   const handleCheckBoxesWeek = (dayWeek) => {
     const listCheckboxes = [];
@@ -86,15 +90,30 @@ export default function Task(props) {
   };
 
   return (
-    <div className="flex flex-row w-full justify-between">
-      <div className="flex flex-row w-1/3 justify-between ">
+    <div className="flex flex-row w-full justify-between gap-3">
+      <div className="flex flex-row w-1/3 justify-between gap-2">
         <p className="text-darkGreen self-center font-normal">{taskName}</p>
-        <div className="flex flex-row">
-          <button className="border-0">
-            <img src={Pen} className="w-5	h-5" alt="update task" />
+        <div className="flex flex-row items-center justify-center relative">
+          <button
+            onClick={() => setShow(!show)}
+            className="!border-none w-8 h-8 bg-lightGreen opacity-0 group-hover:opacity-100 transition-opacity duration-200"
+          >
+            <img src={More} alt="More icon" />
           </button>
-          <Log />
-          <Invite />
+          <div
+            className={`absolute min-w-40 bg-white shadow-md border border-mediumGreen top-8 right-1 z-10 rounded-md ${
+              show ? "block" : "hidden"
+            }`}
+          >
+            <div className="w-full cursor-pointer">
+              <div className="text-sm p-2 hover:bg-lightGreen flex items-center gap-2">
+                <img src={Pen} className="w-4	h-4" alt="update task" />
+                <span>Edit task</span>
+              </div>
+              <Log />
+              <Invite />
+            </div>
+          </div>
         </div>
       </div>
       {calendarVue === "week" ? (

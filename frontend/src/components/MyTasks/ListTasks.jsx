@@ -17,7 +17,7 @@ export default function ListTasks(props) {
           <>
             {getActivityInfo.Tasks.map((task, i) => {
               return (
-                <div className="border-b-2 border-lightGreen" key={i}>
+                <div className="border-b-2 border-lightGreen relative group" key={i}>
                   <Task
                     taskName={task.taskName}
                     taskDays={task.days}
