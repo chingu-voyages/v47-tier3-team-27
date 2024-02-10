@@ -32,11 +32,13 @@ async function signIn(username, email, password) {
   });
   console.log("response sign in", response);
   if (response.status === 200) {
+    console.log("yep got here");
     const data = await response.json();
+
     const token = data.token;
     sessionStorage.setItem("token", token);
     console.log("if token, all good", token);
-    return true;
+    return data;
   } else {
     // Registration failed, handle errors
     const errorData = await response.json();

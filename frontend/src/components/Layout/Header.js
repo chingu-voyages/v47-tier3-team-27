@@ -1,13 +1,13 @@
 import React, { useContext, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import logo from "../../assets/LOGO.png";
 import arrowDown from "../../assets/arrow-down.png";
 import { UserContext } from "../../contexts/UserContext";
 import authAPI from "../../services/authAPI";
 
 export default function Header() {
-  const { user } = useContext(UserContext);
-
+  const navigate = useNavigate();
+  const { username } = useContext(UserContext);
   const [show, setIsShow] = useState(false);
 
   const handleClick = () => {
@@ -20,7 +20,7 @@ export default function Header() {
       const response = await authAPI.signOut();
       if (response) {
         console.log("user logged out");
-        //will need to redirect to login page
+        navigate("/");
       }
     } catch (error) {
       console.log(error);
@@ -39,7 +39,7 @@ export default function Header() {
           className="h-full w-24 flex flex-row items-center	justify-evenly border-0"
           onClick={handleClick}
         >
-          <p>{user}</p>
+          <p>{username}</p>
           <img className="w-2.5	h-2.5" src={arrowDown} alt="arrow down" />
         </button>
         {show && (
