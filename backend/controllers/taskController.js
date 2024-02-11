@@ -39,7 +39,7 @@ async function addTask(req, res) {
     });
 
     const savedTask = await newTask.save();
-
+    console.log("savedTask", savedTask);
     res.status(201).send(savedTask);
   } catch (error) {
     console.log(error);

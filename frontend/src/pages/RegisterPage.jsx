@@ -2,7 +2,7 @@ import React from "react";
 import circles from "../assets/3circles.svg";
 import checklist from "../assets/checklist.svg";
 import Logo from "../components/Logo";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import fb from "../assets/fb.png";
 import twitter from "../assets/twitter.png";
 import gmail from "../assets/gmail.png";
@@ -11,7 +11,12 @@ import SignForm from "../components/SignForm";
 
 import authAPI from "../services/authAPI";
 
+import { useContext } from "react";
+import { UserContext } from "../contexts/UserContext";
+
 export default function RegisterPage() {
+  const navigate = useNavigate();
+  const { setUserId, setUserName } = useContext(UserContext);
   const handleSubmitSignUp = async (infoUser) => {
     try {
       const response = await authAPI.signUp(
@@ -20,8 +25,12 @@ export default function RegisterPage() {
         infoUser.password
       );
       if (response) {
-        // will need to add redirection to dashboard
+        console.log("response register", response);
+        setUserName(response.username);
+        setUserId(response.userId);
+
         console.log("user logged in");
+        navigate("/dashboard");
       }
     } catch (error) {
       console.log(error);
