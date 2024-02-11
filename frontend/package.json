@@ -42,7 +42,14 @@
       "last 1 safari version"
     ]
   },
+<<<<<<< HEAD
   "devDependencies": {
     "tailwindcss": "^3.4.1"
   }
+=======
+  "main": "index.js",
+  "author": "",
+  "license": "ISC",
+  "description": ""
+>>>>>>> white_BF
 }

@@ -1,0 +1,13 @@
+const tasks = await User.find();
+console.log(tasks)
+ // Count completed and uncompleted tasks
+const completedTasks = tasks.filter(task => task.isComplete).length;
+const uncompletedTasks = tasks.filter(task => !task.isComplete).length;
+      console.log(uncompletedTasks)
+      console.log(completedTasks)
+
+// Get the total number of tasks
+const totalTasks = tasks.length;
+      console.log(totalTasks)
+// Send the total number of tasks as a JSON response
+res.json({ "total": totalTasks, "Complete":completedTasks, "incomplete":uncompletedTasks });
