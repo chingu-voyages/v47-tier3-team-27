@@ -42,12 +42,11 @@ const editLog = async (req, res) => {
       logDescription: req.body.logDescription,
     });
     
-    
     if (!updatedLog) {
       return res.status(404).send({ error: "Log not found" });
     }
 
-    res.status(200).send(updatedLog);
+    res.status(200).send({message: "Log updated successfully!"});
   } catch (error) {
     res.status(500).send({ message: error });
   }

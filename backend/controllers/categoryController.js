@@ -32,5 +32,20 @@ const getCategories = async (req, res) => {
     res.status(500).send({ message: error });
   }
 };
+// display single category and its linked subcategories:
+// http://localhost:5000/api/categories/catid
+const getCategoryById = async (req, res) => {
+  try {
+    const { catid } = req.params
+    const category = await Category.findById(catid)
+      .populate("subcategories")
+      .exec();
+console.log(category)
+    res.json(category);
+    console.log("Success finding category")
+  } catch (error) {
+    res.status(500).send({ message: error });
+  }
+};
 
-module.exports = { addCategory, getCategories };
+module.exports = { addCategory, getCategories, getCategoryById };
