@@ -6,23 +6,31 @@ import fb from "../assets/fb.png";
 import img from "../assets/checklist-img.png";
 import twitter from "../assets/twitter.png";
 import gmail from "../assets/gmail.png";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import Logo from "../components/Logo";
 import authAPI from "../services/authAPI";
 import SignForm from "../components/SignForm";
 
+import { useContext } from "react";
+import { UserContext } from "../contexts/UserContext";
+
 export default function HomePage() {
+  const navigate = useNavigate();
+  const { setUserId, setUsername, setUserTasks } = useContext(UserContext);
+
   const handleSignIn = async (infoUser) => {
     try {
-      console.log("trying");
       const response = await authAPI.signIn(
         infoUser.username,
         infoUser.email,
         infoUser.password
       );
       if (response) {
-        // will need to add redirection to dashboard
-        console.log("user logged in");
+        console.log("response homepage", response);
+        setUserId(response.userId);
+        setUsername(response.username);
+        setUserTasks(response.tasks);
+        navigate("/dashboard");
       }
     } catch (error) {
       console.log(error);

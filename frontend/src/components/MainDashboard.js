@@ -4,17 +4,27 @@ import linesTop from "../assets/greenLinesTop.png";
 import linesBottom from "../assets/greenLinesBottom.png";
 import Log from "./Log";
 
+import { useContext } from "react";
+import { UserContext } from "../contexts/UserContext";
+
 export default function MainDashboard() {
+  const { userId, username, userTasks } = useContext(UserContext);
+
+  console.log("userId in mainDashboard", userId);
+  console.log("username in mainDashboard", username);
+
+  console.log("userTasks in mainDashboard", userTasks);
+
   return (
     <section className="w-full h-full relative">
       <figure className="absolute right-0 top-[-2rem] z-0">
         <img className="h-[210px] opacity-30 md:opacity-100" src={image} />
       </figure>
       <div className="relative z-1">
-        <h2>Welcome back, Joe!</h2>
+        <h2>Welcome back, {username}!</h2>
       </div>
       <p className="relative z-1 inter font-semibold text-lg mb-8">
-        Monday, 25th January
+        Monday, 25th January /
       </p>
       <div className="relative z-1 pb-8 mb-8">
         <figure className="absolute top-0 left-0 z-0">

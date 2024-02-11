@@ -1,6 +1,5 @@
 const Category = require("../models/Category");
 
-
 // create a new category:
 // http://localhost:5000/api/categories/add
 const addCategory = async (req, res) => {
@@ -8,17 +7,16 @@ const addCategory = async (req, res) => {
     const { name } = req.body;
 
     const newCategory = new Category({
-      name
+      name,
     });
 
     await newCategory.save();
-    console.log("New Category created successfully!");
+    console.log("New Category created successfully!", newCategory);
     res.status(200).send({ message: "Success" });
   } catch (error) {
     res.status(500).send({ message: error });
   }
 };
-
 
 // display all existing categories:
 // http://localhost:5000/api/categories/all

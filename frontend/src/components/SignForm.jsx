@@ -21,7 +21,9 @@ export default function SignForm(props) {
     }));
   };
 
-  const sendDataToParent = () => {
+  const sendDataToParent = (event) => {
+    event.preventDefault();
+
     handleSubmit(infoUser);
   };
 
