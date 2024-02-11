@@ -6,7 +6,7 @@ const { addCategory, getCategories, getCategoryById } = require("../controllers/
 // /http://localhost:5000/api/categories
 categoryRouter.route("/add").post(addCategory);
 categoryRouter.route("/all").get(getCategories);
-categoryRouter.route("/get/:catid").get(getCategoryById);
+categoryRouter.route("/get/:id").get(getCategoryById);
 
 
 module.exports = categoryRouter;

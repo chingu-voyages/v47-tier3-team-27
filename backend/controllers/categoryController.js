@@ -33,16 +33,14 @@ const getCategories = async (req, res) => {
   }
 };
 // display single category and its linked subcategories:
-// http://localhost:5000/api/categories/catid
+// http://localhost:5000/api/categories/get/:id
 const getCategoryById = async (req, res) => {
   try {
-    const { catid } = req.params
-    const category = await Category.findById(catid)
+    const { id } = req.params;
+    const category = await Category.findById(id)
       .populate("subcategories")
       .exec();
-console.log(category)
     res.json(category);
-    console.log("Success finding category")
   } catch (error) {
     res.status(500).send({ message: error });
   }
