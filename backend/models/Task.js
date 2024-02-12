@@ -2,14 +2,14 @@ const mongoose = require('mongoose')
 const Schema = mongoose.Schema
 
 const Task = new Schema ({
-    name: { type: String },
-    taskDescription: { type: String },
-    isCompleted: { type: Boolean},
+    name: { type: String, required: true },
+    taskDescription: { type: String, required: true },
+    isCompleted: { type: Boolean, required: true },
     deadline: { type: Date },
     days: [],
-    users:[{ type: Schema.Types.ObjectId, ref: 'User'}],
+    users:[{ type: Schema.Types.ObjectId, ref: 'User', required: true}],
     history: [{ type: Schema.Types.ObjectId, ref: 'Log'}],
-    subcategory: { type: Schema.Types.ObjectId, ref: 'Subcategory'},
+    subcategory: { type: Schema.Types.ObjectId, ref: 'Subcategory', required: true},
     priority: { type: Number }
 }, {
     timestamps: true,
