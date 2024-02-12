@@ -11,6 +11,8 @@ const Task = new Schema ({
     history: [{ type: Schema.Types.ObjectId, ref: 'Log'}],
     subcategory: { type: Schema.Types.ObjectId, ref: 'Subcategory'},
     priority: { type: Number }
+}, {
+    timestamps: true,
 })
 
 

@@ -1,8 +1,12 @@
 const express = require("express");
 const connectMongoDB = require("./config/db"); // require DB connection
 const dotenv = require("dotenv");
-const cors = require('cors')
-const userRoutes = require('./routes/userRoutes')
+const cors = require("cors");
+const authRoutes = require("./routes/authRoutes");
+const categoryRoutes = require("./routes/categoryRoutes");
+const subcategoryRoutes = require("./routes/subcategoryRoutes");
+const taskRoutes = require("./routes/taskRoutes");
+const logRoutes = require("./routes/logRoutes");
 
 connectMongoDB();
 
@@ -13,7 +17,15 @@ app.use(express.json());
 
 app.use(cors());
 
-app.use('/api/users', userRoutes)
+//api routes
+// "api/auth/signup"
+app.use("/api", authRoutes);
+app.use("/api/categories", categoryRoutes);
+app.use("/api/subcategories", subcategoryRoutes);
+app.use("/api/tasks", taskRoutes);
+app.use("/api/logs", logRoutes);
+
+// app.use("/api/users", userRoutes);
 
 const port = process.env.PORT || 5000;
 
