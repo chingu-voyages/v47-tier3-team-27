@@ -26,7 +26,6 @@ export default function HomePage() {
         infoUser.password
       );
       if (response) {
-        console.log("response homepage", response);
         setUserId(response.userId);
         setUsername(response.username);
         setUserTasks(response.tasks);
