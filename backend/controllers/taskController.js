@@ -1,4 +1,29 @@
+const moment = require("moment");
+
 const Task = require("../models/Task");
+
+async function getDailyTasksByUserId(req, res) {
+  try {
+    const userId = req.params.userId;
+    const todayStart = moment().startOf("day");
+    const todayEnd = moment().endOf("day");
+
+    const tasks = await Task.find({
+      users: userId,
+      createdAt: {
+        $gte: todayStart.toDate(),
+        $lte: todayEnd.toDate(),
+      },
+    });
+
+    console.log(tasks);
+
+    res.status(200).send(tasks);
+  } catch (error) {
+    console.log(error);
+    res.status(500).send({ error: "Internal Server Error" });
+  }
+}
 
 async function getTasksByUserId(req, res) {
   try {
@@ -89,4 +114,5 @@ module.exports = {
   editTask,
   deleteTask,
   getTasksByUserId,
+  getDailyTasksByUserId,
 };
