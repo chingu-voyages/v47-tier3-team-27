@@ -1,10 +1,8 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useContext } from "react";
 // import data from "../../data/tasks-example.json";
-import Task from "./Task";
-import SubCategory from "./SubCategory";
-import { useContext } from "react";
 import { UserContext } from "../../contexts/UserContext";
 import dataAPI from "../../services/dataAPI";
+import Task from "./Task";
 
 export default function ListTasks(props) {
   const { dayWeek, dayMonth, calendarVue } = props;
@@ -28,20 +26,20 @@ export default function ListTasks(props) {
       const updatedSubCategories = [];
 
       tasksData.forEach((task) => {
-        allCategories.map((category) => {
+        allCategories.forEach((category) => {
           //check first if category in updatedcategories before continuing
           if (updatedCategories.includes(category)) {
             return;
           }
 
-          category.subcategories.map((element) => {
+          category.subcategories.forEach((element) => {
             if (element._id === task.subcategory) {
               updatedCategories.push(category);
             }
           });
         });
 
-        allSubCategories.map((subcategory) => {
+        allSubCategories.forEach((subcategory) => {
           if (task.subcategory === subcategory._id) {
             updatedSubCategories.push(subcategory);
           }
@@ -53,66 +51,77 @@ export default function ListTasks(props) {
       setIsLoading(false);
     };
     getAllData();
-  }, []);
+  }, [userId]);
 
-  const getActivityTypes = (activityTypes) => {
-    let results = [];
-    for (let i = 0; i < activityTypes.length; i++) {
-      const getActivityInfo = activityTypes[i];
+  //     const updatedCategories = [];
+  //     const updatedSubCategories = [];
 
-      results.push(
-        <>
-          <SubCategory activityName={getActivityInfo.activityName} key={i} />
-          <>
-            {getActivityInfo.Tasks.map((task, i) => {
-              return (
-                <div
-                  className="border-b-2 border-lightGreen relative group"
-                  key={i}
-                >
-                  <Task
-                    key={i}
-                    taskName={task.taskName}
-                    taskDays={task.days}
-                    dayWeek={dayWeek}
-                    dayMonth={dayMonth}
-                    calendarVue={calendarVue}
-                  />
-                </div>
-              );
-            })}
-          </>
-        </>
-      );
-    }
+  //     tasksData.forEach((task) => {
+  //       allCategories.map((category) => {
+  //         //check first if category in updatedcategories before continuing
+  //         if (updatedCategories.includes(category)) {
+  //           return;
+  //         }
 
-    return results;
-  };
+  //         category.subcategories.map((element) => {
+  //           if (element._id === task.subcategory) {
+  //             updatedCategories.push(category);
+  //           }
+  //         });
+  //       });
+
+  //       allSubCategories.map((subcategory) => {
+  //         if (task.subcategory === subcategory._id) {
+  //           updatedSubCategories.push(subcategory);
+  //         }
+  //       });
+  //     });
+
+  //     setListUserCategories(updatedCategories);
+  //     setListUserSubCategories(updatedSubCategories);
+  //     setIsLoading(false);
+  //   };
+  //   getAllData();
+  // }, []);
 
   const checkSubcategory = ({ category }) => {
     return category.subcategories.map((subcategoryInCategory) => {
-      const matchingSubcategory = listUserSubCategories.find((subcategory) => {
-        return subcategoryInCategory._id === subcategory._id;
-      });
+      const matchingSubcategory = listUserSubCategories.find(
+        (subcategory) => subcategoryInCategory._id === subcategory._id
+      );
 
-      if (matchingSubcategory) {
-        return (
-          <div>
-            <h6 className="text-darkGreen font-semibold mt-3">
-              {matchingSubcategory.name}
-            </h6>
-            {checkTask(matchingSubcategory._id)}
-          </div>
-        );
-      }
+      // if (matchingSubcategory) {
+      return matchingSubcategory ? (
+        <div>
+          <h6 className="text-mediumGreen mt-2 font-medium">
+            {matchingSubcategory.name}
+          </h6>
+          {checkTask(matchingSubcategory._id)}
+        </div>
+      ) : (
+        <></>
+      );
+      // }
     });
   };
 
   const checkTask = (subcategoryId) => {
-    return listUserTasks.map((task) => {
-      if (subcategoryId === task.subcategory) {
-        return <p>{task.name}</p>;
-      }
+    return listUserTasks.map((task, i) => {
+      return subcategoryId === task.subcategory ? (
+        <div className="border-b-2 border-lightGreen relative group" key={i}>
+          <Task
+            key={i}
+            taskId={task._id}
+            taskName={task.name}
+            taskDays={task.days}
+            dayWeek={dayWeek}
+            dayMonth={dayMonth}
+            calendarVue={calendarVue}
+          />
+        </div>
+      ) : (
+        <></>
+      );
     });
   };
 
@@ -123,12 +132,11 @@ export default function ListTasks(props) {
         <div>
           {listUserCategories.map((category, i) => {
             return (
-              <div className="w-full">
-                <h5 key={i} className="text-darkGreen font-semibold mt-3">
+              <div key={i} className="w-full">
+                <h5 className="text-darkGreen font-semibold mt-3">
                   {category.name}
                 </h5>
                 <div>{checkSubcategory({ category })}</div>
-                {/* <>{getActivityTypes(category.activityTypes)}</> */}
               </div>
             );
           })}

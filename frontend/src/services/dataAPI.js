@@ -7,7 +7,6 @@ async function getTasks(userId) {
       "Content-Type": "application/json",
     },
   });
-  console.log("get tasks. dataAPI", response);
   if (response.status === 200) {
     const data = await response.json();
     return data;
@@ -24,7 +23,6 @@ async function getCategories() {
       "Content-Type": "application/json",
     },
   });
-  console.log("get categories. dataAPI", response);
   if (response.status === 200) {
     const data = await response.json();
     return data;
