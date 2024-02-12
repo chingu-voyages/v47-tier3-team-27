@@ -18,7 +18,7 @@ export default function Task(props) {
         taskDays.includes(day[1].toString())
       ) {
         listCheckboxes.push(
-          <div className="flex justify-center items-center" id={day}>
+          <div className="flex justify-center items-center" key={day} id={day}>
             <input
               type="checkbox"
               className="hidden peer"

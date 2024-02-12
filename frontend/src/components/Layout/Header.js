@@ -19,7 +19,6 @@ export default function Header() {
     try {
       const response = await authAPI.signOut();
       if (response) {
-        console.log("user logged out");
         navigate("/");
       }
     } catch (error) {

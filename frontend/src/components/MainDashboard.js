@@ -8,12 +8,7 @@ import { useContext } from "react";
 import { UserContext } from "../contexts/UserContext";
 
 export default function MainDashboard() {
-  const { userId, username, userTasks } = useContext(UserContext);
-
-  console.log("userId in mainDashboard", userId);
-  console.log("username in mainDashboard", username);
-
-  console.log("userTasks in mainDashboard", userTasks);
+  const { username, userTasks } = useContext(UserContext);
 
   return (
     <section className="w-full h-full relative">
