@@ -1,15 +1,8 @@
-import React, { useState } from "react";
-import linesBottom from "../assets/greenLinesBottom.png";
-import {
-  addTask,
-  getCategories,
-  addCategory,
-  addSubCategory,
-} from "../utils/api";
-import { useContext } from "react";
-import { UserContext } from "../contexts/UserContext";
-import { useEffect } from "react";
+import React, { useState, useContext, useEffect } from "react";
 import Select from "react-select";
+import { addTask, getCategories } from "../utils/api";
+import { UserContext } from "../contexts/UserContext";
+import linesBottom from "../assets/greenLinesBottom.png";
 
 export default function NewTask() {
   const [isSpecificDate, setIsSpecificDate] = useState(false);
@@ -26,22 +19,16 @@ export default function NewTask() {
   const [subcategories, setSubcategories] = useState([]);
   const [selectedDays, setSelectedDays] = useState([]);
   const [selectedMonthDays, setSelectedMonthDays] = useState([]);
-
-  const onAddBtnClick = () => {
-    setInputList([
-      ...inputList,
-      <input
-        key={inputList.length}
-        className="rounded-full w-fit mt-1"
-        placeholder="testing@testing.com"
-      />,
-    ]);
-  };
-
-  const daysOfMonthOptions = [...Array(daysInMonth).keys()].map((day) => ({
-    value: day + 1,
-    label: `${day + 1}`,
-  }));
+  const [formData, setFormData] = useState({
+    name: "",
+    taskDescription: "",
+    priority: "",
+    subcategory: "",
+    category: "",
+    deadline: "",
+    users: [userId],
+    days: [],
+  });
 
   const daysOfWeekOptions = [
     { value: "Monday", label: "Monday" },
@@ -53,12 +40,19 @@ export default function NewTask() {
     { value: "Sunday", label: "Sunday" },
   ];
 
+  const daysOfMonthOptions = [...Array(daysInMonth).keys()].map((day) => ({
+    value: day + 1,
+    label: `${day + 1}`,
+  }));
+
   const handleDayChange = (selectedOptions) => {
     setSelectedDays(selectedOptions.map((option) => option.value));
+    setSelectedMonthDays([]); 
   };
 
   const handleMonthDayChange = (selectedOptions) => {
     setSelectedMonthDays(selectedOptions);
+    setSelectedDays([]); 
   };
 
   const handleCategoryChange = (e) => {
@@ -89,16 +83,78 @@ export default function NewTask() {
     fetchCategories();
   }, []);
 
-  const [formData, setFormData] = useState({
-    name: "",
-    taskDescription: "",
-    priority: "",
-    subcategory: "",
-    category: "",
-    deadline: "",
-    users: [userId],
-    days: [],
-  });
+  const handleInputChange = (fieldName, value) => {
+    setFormData({
+      ...formData,
+      [fieldName]: value,
+    });
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    if (
+      !formData.name ||
+      !formData.category ||
+      !formData.priority ||
+      !formData.taskDescription ||
+      !formData.subcategory
+    ) {
+      alert("Please fill out all required fields.");
+      return;
+    }
+
+    const days = isRecurrence
+      ? [...selectedDays, ...selectedMonthDays.map((day) => day.value)]
+      : [];
+    if (isRecurrence && days.length === 0) {
+      alert("Please select recurrence days.");
+      return;
+    }
+
+    if (isSpecificDate && !formData.deadline) {
+      alert("Please specify a deadline.");
+      return;
+    }
+
+    const taskData = {
+      ...formData,
+      days,
+      deadline: isSpecificDate ? formData.deadline : null,
+    };
+
+    try {
+      await addTask(taskData);
+      setFormData({
+        name: "",
+        taskDescription: "",
+        priority: "",
+        subcategory: "",
+        category: "",
+        deadline: "",
+        users: [userId],
+        days: [],
+      });
+      setSelectedDays([]);
+      setSelectedMonthDays([]);
+      setIsSpecificDate(false);
+      setIsRecurrence(false);
+    } catch (error) {
+      console.error("Error adding task:", error);
+    }
+  };
+
+  const onAddBtnClick = () => {
+    setInputList(
+      inputList.concat(
+        <input
+          key={inputList.length}
+          className="rounded-full w-fit mt-1"
+          placeholder="testing@testing.com"
+        />
+      )
+    );
+  };
 
   const handleDelete = () => {
     setFormData({
@@ -115,59 +171,46 @@ export default function NewTask() {
     setSelectedMonthDays([]);
     setIsSpecificDate(false);
     setIsRecurrence(false);
-  };
-  const handleInputChange = (fieldName, value) => {
-    setFormData({
-      ...formData,
-      [fieldName]: value,
-    });
+    setInputList([]);
   };
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-
-    if (
-      !isRecurrence ||
-      !formData.days ||
-      selectedDays.length === 0 ||
-      selectedMonthDays.length === 0 ||
-      !isSpecificDate ||
-      !formData.deadline ||
-      formData.deadline.length === 0 ||
-      !formData.name ||
-      !formData.category ||
-      !formData.priority ||
-      !formData.taskDescription ||
-      !formData.subcategory
-    ) {
-      alert("Please fill out all required fields.");
-      return;
-    }
-
-    try {
-      const updatedFormData = {
-        ...formData,
-        days: [...selectedDays, ...selectedMonthDays.map((day) => day.value)],
-      };
-
-      const { category, ...formDataWithoutCategory } = updatedFormData;
-
-      await addTask(formDataWithoutCategory);
-
-      setFormData({
-        name: "",
-        taskDescription: "",
-        priority: "",
-        category: "",
-        subcategory: "",
-        deadline: "",
-        users: [userId],
-        days: [],
-      });
-      setIsSpecificDate(false);
-    } catch (error) {
-      console.error("Error adding task:", error);
-    }
+  const customStyles = {
+    control: (provided) => ({
+      ...provided,
+      borderColor: "var(--clr-medium-green)", 
+      boxShadow: "none", 
+      "&:hover": {
+        borderColor: "var(--clr-dark-green)",
+      },
+    }),
+    option: (provided, state) => ({
+      ...provided,
+      backgroundColor: state.isSelected
+        ? "var(--clr-medium-green)"
+        : state.isFocused
+        ? "var(--clr-light-green)"
+        : "var(--clr-white)",
+      color: state.isSelected ? "var(--clr-white)" : "var(--clr-dark-green)",
+      "&:active": {
+        backgroundColor: "var(--clr-dark-green)",
+      },
+    }),
+    multiValue: (provided) => ({
+      ...provided,
+      backgroundColor: "var(--clr-medium-green)",
+    }),
+    multiValueLabel: (provided) => ({
+      ...provided,
+      color: "var(--clr-white)",
+    }),
+    multiValueRemove: (provided) => ({
+      ...provided,
+      color: "var(--clr-white)",
+      ":hover": {
+        backgroundColor: "var(--clr-dark-green)",
+        color: "var(--clr-white)",
+      },
+    }),
   };
 
   return (
@@ -292,6 +335,7 @@ export default function NewTask() {
             </label>
             <div className="w-3/4">
               <Select
+                placeholder="Select day(s) of the week"
                 id="week"
                 isDisabled={!isRecurrence}
                 className="mb-4"
@@ -301,8 +345,11 @@ export default function NewTask() {
                 value={daysOfWeekOptions.filter((option) =>
                   selectedDays.includes(option.value)
                 )}
+                styles={customStyles} 
               />
+
               <Select
+                placeholder="Select day(s) in the month"
                 id="month"
                 isDisabled={!isRecurrence}
                 className="mb-4"
@@ -310,6 +357,7 @@ export default function NewTask() {
                 options={daysOfMonthOptions}
                 onChange={handleMonthDayChange}
                 value={selectedMonthDays}
+                styles={customStyles} 
               />
             </div>
           </div>
