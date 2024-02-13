@@ -4,6 +4,7 @@ import More from "../../assets/more.png";
 
 import Log from "../Log";
 import Invite from "../Invite";
+import Text from "../../assets/text.png";
 
 export default function Task(props) {
   const { taskName, taskId, taskDays, dayWeek, dayMonth, calendarVue } = props;
@@ -136,7 +137,18 @@ export default function Task(props) {
                 <img src={Pen} className="w-4	h-4" alt="update task" />
                 <span>Edit task</span>
               </div>
-              <Log taskId={taskId}/>
+              <Log taskId={taskId}>
+                <div
+                  className="text-sm p-2 hover:bg-lightGreen flex items-center gap-2"
+                >
+                  <img
+                    src={Text}
+                    className="w-4	h-4"
+                    alt="click to open a log of this taks's changes history"
+                  />
+                  <span>View log</span>
+                </div>
+              </Log>
               <Invite />
             </div>
           </div>
