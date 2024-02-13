@@ -17,10 +17,6 @@ export default function SideNavbar() {
       name: "New Task",
       href: "/newtask",
     },
-    {
-      name: "Invite",
-      href: "/invite",
-    },
   ];
 
   return (
@@ -42,7 +38,7 @@ export default function SideNavbar() {
           </li>
         ))}
       </ul>
-      <div className="flex items-center justify-center cursor-pointer">
+      <div className="flex items-center justify-center cursor-pointer mb-2.5">
         <a
           href="https://github.com/chingu-voyages/v47-tier3-team-27"
           target="_blank"

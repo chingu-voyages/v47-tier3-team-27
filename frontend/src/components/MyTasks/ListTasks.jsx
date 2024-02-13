@@ -53,37 +53,6 @@ export default function ListTasks(props) {
     getAllData();
   }, [userId]);
 
-  //     const updatedCategories = [];
-  //     const updatedSubCategories = [];
-
-  //     tasksData.forEach((task) => {
-  //       allCategories.map((category) => {
-  //         //check first if category in updatedcategories before continuing
-  //         if (updatedCategories.includes(category)) {
-  //           return;
-  //         }
-
-  //         category.subcategories.map((element) => {
-  //           if (element._id === task.subcategory) {
-  //             updatedCategories.push(category);
-  //           }
-  //         });
-  //       });
-
-  //       allSubCategories.map((subcategory) => {
-  //         if (task.subcategory === subcategory._id) {
-  //           updatedSubCategories.push(subcategory);
-  //         }
-  //       });
-  //     });
-
-  //     setListUserCategories(updatedCategories);
-  //     setListUserSubCategories(updatedSubCategories);
-  //     setIsLoading(false);
-  //   };
-  //   getAllData();
-  // }, []);
-
   const checkSubcategory = ({ category }) => {
     return category.subcategories.map((subcategoryInCategory) => {
       const matchingSubcategory = listUserSubCategories.find(
@@ -127,7 +96,7 @@ export default function ListTasks(props) {
 
   return (
     <section className="w-full">
-      {isLoading && <p>wait</p>}
+      {isLoading && <p>Loading...</p>}
       {!isLoading ? (
         <div>
           {listUserCategories.map((category, i) => {
@@ -142,7 +111,7 @@ export default function ListTasks(props) {
           })}
         </div>
       ) : (
-        <p>nothing to show</p>
+        <></>
       )}
     </section>
   );
