@@ -27,4 +27,28 @@ const addTask = async (taskData) => {
   }
 };
 
-export { getCategories, addTask };
+const addCategory = async (categoryData) => {
+  console.log("categoryData:", categoryData);
+  try {
+    const response = await api.post("/categories/add", categoryData);
+    console.log("response:", response);
+
+    return response.data;
+  } catch (error) {
+    throw error;
+  }
+};
+
+const addSubCategory = async (subCategoryData) => {
+  console.log("subCategoryData:", subCategoryData);
+  try {
+    const response = await api.post("/subcategories/add", subCategoryData);
+    console.log("response:", response);
+
+    return response.data;
+  } catch (error) {
+    throw error;
+  }
+};
+
+export { getCategories, addTask, addCategory, addSubCategory };
