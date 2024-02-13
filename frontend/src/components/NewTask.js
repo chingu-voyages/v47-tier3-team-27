@@ -1,10 +1,17 @@
 import React, { useState, useContext, useEffect } from "react";
+import CreatableSelect from "react-select/creatable";
 import Select from "react-select";
-import { addTask, getCategories } from "../utils/api";
+import {
+  addTask,
+  getCategories,
+  addCategory,
+  addSubCategory,
+} from "../utils/api";
 import { UserContext } from "../contexts/UserContext";
 import linesBottom from "../assets/greenLinesBottom.png";
 
 export default function NewTask() {
+  const [isLoading, setIsLoading] = useState(false);
   const [isSpecificDate, setIsSpecificDate] = useState(false);
   const [isRecurrence, setIsRecurrence] = useState(false);
   const [inputList, setInputList] = useState([]);
@@ -16,7 +23,9 @@ export default function NewTask() {
   ).getDate();
 
   const [categories, setCategories] = useState([]);
+  const [selectedCategory, setSelectedCategory] = useState(null);
   const [subcategories, setSubcategories] = useState([]);
+  const [selectedSubcategory, setSelectedSubcategory] = useState(null);
   const [selectedDays, setSelectedDays] = useState([]);
   const [selectedMonthDays, setSelectedMonthDays] = useState([]);
   const [formData, setFormData] = useState({
@@ -47,34 +56,89 @@ export default function NewTask() {
 
   const handleDayChange = (selectedOptions) => {
     setSelectedDays(selectedOptions.map((option) => option.value));
-    setSelectedMonthDays([]); 
+    setSelectedMonthDays([]);
   };
 
   const handleMonthDayChange = (selectedOptions) => {
     setSelectedMonthDays(selectedOptions);
-    setSelectedDays([]); 
+    setSelectedDays([]);
   };
 
-  const handleCategoryChange = (e) => {
-    const selectedCategoryId = e.target.value;
-    const selectedCategory = categories.find(
-      (category) => category._id === selectedCategoryId
+  const handleCategoryChange = (newValue) => {
+    setSelectedCategory(newValue);
+    setSubcategories(
+      newValue
+        ? newValue.subcategories.map((sub) => ({
+            label: sub.name,
+            value: sub._id,
+          }))
+        : []
     );
-    if (selectedCategory) {
-      setSubcategories(selectedCategory.subcategories);
-      setFormData((prevData) => ({
-        ...prevData,
-        category: selectedCategoryId,
-        subcategory: "",
-      }));
+    setFormData((prev) => ({
+      ...prev,
+      category: newValue ? newValue.value : "",
+      subcategory: "",
+    }));
+  };
+
+  const handleSubcategoryChange = (newValue) => {
+    setSelectedSubcategory(newValue);
+    setFormData((prev) => ({
+      ...prev,
+      subcategory: newValue ? newValue.value : "",
+    }));
+  };
+
+  const handleCreateCategory = async (inputValue) => {
+    setIsLoading(true);
+    try {
+      const response = await addCategory({ name: inputValue });
+      const newCategory = response;
+      const newOption = {
+        label: newCategory.name,
+        value: newCategory._id,
+        subcategories: [],
+      };
+      setCategories((prev) => [...prev, newOption]);
+      setSelectedCategory(newOption);
+    } catch (error) {
+      console.error("Error adding category:", error);
     }
+    setIsLoading(false);
+  };
+
+  const handleCreateSubcategory = async (inputValue) => {
+    if (!selectedCategory) return;
+    setIsLoading(true);
+    try {
+      const response = await addSubCategory({
+        name: inputValue,
+        categoryId: selectedCategory.value,
+      });
+      const newSubcategory = response;
+      const newOption = {
+        label: newSubcategory.name,
+        value: newSubcategory._id,
+      };
+      setSubcategories((prev) => [...prev, newOption]);
+      setSelectedSubcategory(newOption);
+    } catch (error) {
+      console.error("Error adding subcategory:", error);
+    }
+    setIsLoading(false);
   };
 
   useEffect(() => {
     const fetchCategories = async () => {
       try {
         const res = await getCategories();
-        setCategories(res);
+        setCategories(
+          res.map((category) => ({
+            label: category.name,
+            value: category._id,
+            subcategories: category.subcategories,
+          }))
+        );
       } catch (error) {
         console.error("Error fetching categories:", error);
       }
@@ -82,7 +146,6 @@ export default function NewTask() {
 
     fetchCategories();
   }, []);
-
   const handleInputChange = (fieldName, value) => {
     setFormData({
       ...formData,
@@ -177,8 +240,8 @@ export default function NewTask() {
   const customStyles = {
     control: (provided) => ({
       ...provided,
-      borderColor: "var(--clr-medium-green)", 
-      boxShadow: "none", 
+      borderColor: "var(--clr-medium-green)",
+      boxShadow: "none",
       "&:hover": {
         borderColor: "var(--clr-dark-green)",
       },
@@ -229,39 +292,31 @@ export default function NewTask() {
               }}
             />
             <label htmlFor="category">Category</label>
-            <select
-              id="category"
-              className="block w-full md:w-3/4 mb-4"
-              onChange={handleCategoryChange}
-              value={formData.category}
-            >
-              <option value="" disabled selected>
-                Select an existing one
-              </option>
-              {categories.map((category) => (
-                <option key={category._id} value={category._id}>
-                  {category.name}
-                </option>
-              ))}
-            </select>
-            <label htmlFor="sub-category">Sub-Category</label>
-            <select
-              id="sub-category"
-              className="block w-full md:w-3/4 mb-4"
-              value={formData.subcategory}
-              onChange={(e) => {
-                handleInputChange("subcategory", e.target.value);
-              }}
-            >
-              <option value="" disabled selected>
-                Select an existing one
-              </option>
-              {subcategories.map((subcategory) => (
-                <option key={subcategory._id} value={subcategory._id}>
-                  {subcategory.name}
-                </option>
-              ))}
-            </select>
+            <div className="w-3/4">
+              <CreatableSelect
+                isClearable
+                isDisabled={isLoading}
+                isLoading={isLoading}
+                onChange={handleCategoryChange}
+                onCreateOption={handleCreateCategory}
+                options={categories}
+                value={selectedCategory}
+                placeholder="Select or create a category"
+                styles={customStyles}
+              />
+              <label htmlFor="sub-category">Sub-Category</label>
+              <CreatableSelect
+                isClearable
+                isDisabled={!selectedCategory || isLoading}
+                isLoading={isLoading}
+                onChange={handleSubcategoryChange}
+                onCreateOption={handleCreateSubcategory}
+                options={subcategories}
+                value={selectedSubcategory}
+                placeholder="Select or create a sub-category"
+                styles={customStyles}
+              />
+            </div>
             <label htmlFor="priority">Priority</label>
             <input
               value={formData.priority}
@@ -345,7 +400,7 @@ export default function NewTask() {
                 value={daysOfWeekOptions.filter((option) =>
                   selectedDays.includes(option.value)
                 )}
-                styles={customStyles} 
+                styles={customStyles}
               />
 
               <Select
@@ -357,7 +412,7 @@ export default function NewTask() {
                 options={daysOfMonthOptions}
                 onChange={handleMonthDayChange}
                 value={selectedMonthDays}
-                styles={customStyles} 
+                styles={customStyles}
               />
             </div>
           </div>
