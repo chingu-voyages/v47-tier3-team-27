@@ -52,8 +52,9 @@ const addSubCategory = async (subCategoryData) => {
 };
 
 const checkEmailExists = async (email) => {
+  console.log("email:", email);
   try {
-    const response = await api.post("/check-email",  email );
+    const response = await api.post("/check-email", email);
     console.log("response:", response);
     return response.data;
   } catch (error) {

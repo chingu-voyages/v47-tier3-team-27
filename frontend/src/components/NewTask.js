@@ -6,9 +6,11 @@ import {
   getCategories,
   addCategory,
   addSubCategory,
+  checkEmailExists,
 } from "../utils/api";
 import { UserContext } from "../contexts/UserContext";
 import linesBottom from "../assets/greenLinesBottom.png";
+import { FaTrash } from "react-icons/fa";
 
 export default function NewTask() {
   const [isLoading, setIsLoading] = useState(false);
@@ -16,11 +18,16 @@ export default function NewTask() {
   const [isRecurrence, setIsRecurrence] = useState(false);
   const [inputList, setInputList] = useState([]);
   const { userId } = useContext(UserContext);
+  const [emailErrors, setEmailErrors] = useState({});
   const daysInMonth = new Date(
     new Date().getFullYear(),
     new Date().getMonth() + 1,
     0
   ).getDate();
+
+  const isValidNameOrDescription = (text) =>
+    /^[A-Za-z0-9]+(?:[ _-][A-Za-z0-9]+)*$/.test(text);
+  const isValidEmail = (email) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
 
   const [categories, setCategories] = useState([]);
   const [selectedCategory, setSelectedCategory] = useState(null);
@@ -91,6 +98,10 @@ export default function NewTask() {
 
   const handleCreateCategory = async (inputValue) => {
     setIsLoading(true);
+    if (!isValidNameOrDescription(inputValue)) {
+      console.error("Invalid category name.");
+      return;
+    }
     try {
       const response = await addCategory({ name: inputValue });
       const newCategory = response;
@@ -109,6 +120,10 @@ export default function NewTask() {
 
   const handleCreateSubcategory = async (inputValue) => {
     if (!selectedCategory) return;
+    if (!isValidNameOrDescription(inputValue)) {
+      console.error("Invalid subcategory name.");
+      return;
+    }
     setIsLoading(true);
     try {
       const response = await addSubCategory({
@@ -156,6 +171,12 @@ export default function NewTask() {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
+    const fieldErrors = validateTaskAndDescription();
+    if (Object.keys(fieldErrors).length > 0) {
+      console.error("Form validation errors:", fieldErrors);
+      return;
+    }
+
     if (
       !formData.name ||
       !formData.category ||
@@ -177,6 +198,12 @@ export default function NewTask() {
 
     if (isSpecificDate && !formData.deadline) {
       alert("Please specify a deadline.");
+      return;
+    }
+
+    const hasEmailErrors = inputList.some((input) => input.error);
+    if (hasEmailErrors) {
+      alert("Please correct the errors before submitting.");
       return;
     }
 
@@ -214,21 +241,108 @@ export default function NewTask() {
     setIsSpecificDate(false);
     setIsRecurrence(false);
     setInputList([]);
-    setSelectedCategory(null); 
-    setSelectedSubcategory(null); 
-    setSubcategories([]); 
+    setSelectedCategory(null);
+    setSelectedSubcategory(null);
+    setSubcategories([]);
   };
 
-  const onAddBtnClick = () => {
-    setInputList(
-      inputList.concat(
-        <input
-          key={inputList.length}
-          className="rounded-full w-fit mt-1"
-          placeholder="testing@testing.com"
-        />
-      )
-    );
+  const onAddBtnClick = async () => {
+    const newInput = {
+      key: inputList.length,
+      value: "",
+      error: "",
+    };
+
+    setInputList([...inputList, newInput]);
+  };
+
+  const handleEmailChange = async (index, email) => {
+    let newInputList = [...inputList];
+    newInputList[index].value = email;
+
+    // Basic email format validation
+    if (!isValidEmail(email)) {
+      newInputList[index].error = "Please enter a valid email address.";
+      setInputList(newInputList);
+      return;
+    }
+
+    if (formData.users.includes(email) || email === userId) {
+      newInputList[index].error =
+        "This email is already added or is your own email.";
+      setInputList(newInputList);
+      return;
+    }
+
+    try {
+      const response = await checkEmailExists({ email });
+      if (response.userId) {
+        setFormData((prev) => ({
+          ...prev,
+          users: [...prev.users, response.userId],
+        }));
+        newInputList[index].error = "";
+      }
+    } catch (error) {
+      console.error("Error validating email:", error);
+      newInputList[index].error = "Error validating email.";
+    }
+
+    setInputList(newInputList);
+  };
+
+  const validateTaskAndDescription = () => {
+    let errors = {};
+    if (!isValidNameOrDescription(formData.name)) {
+      errors.name =
+        "Task name must be more than two characters and cannot be only numbers/symbols.";
+    }
+
+    if (!isValidNameOrDescription(formData.taskDescription)) {
+      errors.description =
+        "Description must be meaningful and cannot be only numbers/symbols.";
+    }
+
+    return errors;
+  };
+
+  const handleDeleteEmailInput = (index) => {
+    const newInputList = [...inputList];
+    const removedEmail = newInputList.splice(index, 1)[0];
+
+    setFormData((prev) => ({
+      ...prev,
+      users: prev.users.filter((id) => id !== removedEmail.userId),
+    }));
+
+    setInputList(newInputList);
+  };
+
+  const handleEmailValidation = async (index) => {
+    const email = inputList[index].value;
+    const newInputList = [...inputList];
+    newInputList[index].error = "";
+
+    try {
+      const response = await checkEmailExists({ email });
+      if (response.userId) {
+        if (response.userId === userId) {
+          newInputList[index].error = "You cannot add your own email.";
+        } else {
+          setFormData((prev) => ({
+            ...prev,
+            users: prev.users.includes(response.userId)
+              ? prev.users
+              : [...prev.users, response.userId],
+          }));
+        }
+      }
+    } catch (error) {
+      newInputList[index].error = "Invalid email";
+      console.error("Error validating email:", error);
+    }
+
+    setInputList(newInputList);
   };
 
   const customStyles = {
@@ -347,8 +461,30 @@ export default function NewTask() {
             />
             <label htmlFor="email" className="mt-10">
               Who will work with you on this task?
-            </label>{" "}
-            {inputList}
+            </label>
+            {inputList.map((input, index) => (
+              <div key={index} className="flex flex-col mt-2">
+                <div className="flex items-center">
+                  <input
+                    type="email"
+                    value={input.value}
+                    className="rounded-full w-3/4"
+                    placeholder="user@example.com"
+                    onChange={(e) => handleEmailChange(index, e.target.value)}
+                    onBlur={() => handleEmailValidation(index)}
+                  />
+                  <button
+                    onClick={() => handleDeleteEmailInput(index)}
+                    className="ml-2 border-none"
+                  >
+                    <FaTrash size={20} />
+                  </button>
+                </div>
+                {input.error && (
+                  <p className="text-red-500 text-xs mt-1">{input.error}</p>
+                )}
+              </div>
+            ))}
             <button
               className="rounded-full px-3 mt-1"
               onClick={(e) => {
@@ -356,7 +492,7 @@ export default function NewTask() {
                 onAddBtnClick();
               }}
             >
-              + add email
+              + Add email
             </button>
           </div>
 
