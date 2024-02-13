@@ -171,12 +171,6 @@ export default function NewTask() {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    const fieldErrors = validateTaskAndDescription();
-    if (Object.keys(fieldErrors).length > 0) {
-      console.error("Form validation errors:", fieldErrors);
-      return;
-    }
-
     if (
       !formData.name ||
       !formData.category ||
@@ -191,21 +185,6 @@ export default function NewTask() {
     const days = isRecurrence
       ? [...selectedDays, ...selectedMonthDays.map((day) => day.value)]
       : [];
-    if (isRecurrence && days.length === 0) {
-      alert("Please select recurrence days.");
-      return;
-    }
-
-    if (isSpecificDate && !formData.deadline) {
-      alert("Please specify a deadline.");
-      return;
-    }
-
-    const hasEmailErrors = inputList.some((input) => input.error);
-    if (hasEmailErrors) {
-      alert("Please correct the errors before submitting.");
-      return;
-    }
 
     const taskData = {
       ...formData,
