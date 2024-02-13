@@ -188,38 +188,17 @@ export default function NewTask() {
 
     try {
       await addTask(taskData);
-      setFormData({
-        name: "",
-        taskDescription: "",
-        priority: "",
-        subcategory: "",
-        category: "",
-        deadline: "",
-        users: [userId],
-        days: [],
-      });
-      setSelectedDays([]);
-      setSelectedMonthDays([]);
-      setIsSpecificDate(false);
-      setIsRecurrence(false);
+      resetForm();
     } catch (error) {
       console.error("Error adding task:", error);
     }
   };
 
-  const onAddBtnClick = () => {
-    setInputList(
-      inputList.concat(
-        <input
-          key={inputList.length}
-          className="rounded-full w-fit mt-1"
-          placeholder="testing@testing.com"
-        />
-      )
-    );
+  const handleDelete = () => {
+    resetForm();
   };
 
-  const handleDelete = () => {
+  const resetForm = () => {
     setFormData({
       name: "",
       taskDescription: "",
@@ -235,6 +214,21 @@ export default function NewTask() {
     setIsSpecificDate(false);
     setIsRecurrence(false);
     setInputList([]);
+    setSelectedCategory(null); 
+    setSelectedSubcategory(null); 
+    setSubcategories([]); 
+  };
+
+  const onAddBtnClick = () => {
+    setInputList(
+      inputList.concat(
+        <input
+          key={inputList.length}
+          className="rounded-full w-fit mt-1"
+          placeholder="testing@testing.com"
+        />
+      )
+    );
   };
 
   const customStyles = {
