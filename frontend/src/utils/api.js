@@ -51,4 +51,20 @@ const addSubCategory = async (subCategoryData) => {
   }
 };
 
-export { getCategories, addTask, addCategory, addSubCategory };
+const checkEmailExists = async (email) => {
+  try {
+    const response = await api.post("/check-email",  email );
+    console.log("response:", response);
+    return response.data;
+  } catch (error) {
+    throw error;
+  }
+};
+
+export {
+  getCategories,
+  addTask,
+  addCategory,
+  addSubCategory,
+  checkEmailExists,
+};
