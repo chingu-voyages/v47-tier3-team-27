@@ -11,6 +11,7 @@ import NewTaskPage from "./pages/NewTaskPage";
 import InvitePage from "./pages/InvitePage";
 import { UserProvider } from "./contexts/UserContext";
 import FourOhFour from "./pages/FourOhFour";
+import Test from "./pages/Test";
 
 
 function App() {
@@ -25,6 +26,8 @@ function App() {
             <Route path="/mytasks" element={<MyTasksPage />} />
             <Route path="/newtask" element={<NewTaskPage />} />
             <Route path="/invite" element={<InvitePage />} />
+
+            <Route path="/test" element={<Test />} />
 
             <Route path="/*" element={<FourOhFour />} />
 

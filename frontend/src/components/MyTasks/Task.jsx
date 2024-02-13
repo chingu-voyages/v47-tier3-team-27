@@ -136,7 +136,7 @@ export default function Task(props) {
                 <img src={Pen} className="w-4	h-4" alt="update task" />
                 <span>Edit task</span>
               </div>
-              <Log />
+              <Log taskId={taskId}/>
               <Invite />
             </div>
           </div>
