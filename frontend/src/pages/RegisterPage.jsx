@@ -25,11 +25,9 @@ export default function RegisterPage() {
         infoUser.password
       );
       if (response) {
-        console.log("response register", response);
         setUserName(response.username);
         setUserId(response.userId);
 
-        console.log("user logged in");
         navigate("/dashboard");
       }
     } catch (error) {

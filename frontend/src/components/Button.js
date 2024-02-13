@@ -6,7 +6,6 @@ export default function Button({
   color = "primary",
   ...props
 }) {
-  console.log(props);
   return (
     <button
       {...props}
