@@ -25,7 +25,7 @@ export default function ListTasks(props) {
       const updatedCategories = [];
       const updatedSubCategories = [];
 
-      tasksData.forEach((task) => {
+      tasksData?.forEach((task) => {
         allCategories.forEach((category) => {
           //check first if category in updatedcategories before continuing
           if (updatedCategories.includes(category)) {
