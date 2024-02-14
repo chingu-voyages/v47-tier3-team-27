@@ -77,7 +77,7 @@ export default function ListTasks(props) {
   };
 
   const handleRemoveTask = (taskId) => {
-    const updatedTasks = listUserTasks.filter(task => task._id !== taskId);
+    const updatedTasks = listUserTasks.filter((task) => task._id !== taskId);
     setListUserTasks(updatedTasks);
   };
 
