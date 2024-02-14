@@ -12,7 +12,6 @@ import { UserContext } from "../contexts/UserContext";
 
 const moment = require("moment");
 
-
 export default function MainDashboard() {
   const { username, userId, userTasks } = useContext(UserContext);
 

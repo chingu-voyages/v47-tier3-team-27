@@ -1,36 +1,61 @@
-# voyage-tasks
+# Task Zen - web app
 
-### Run development server Front End
+## Table of Contents
 
-```
-npm start
-```
+- [Project Description](#project-description)
+- [Major Functions and Features](#major-functions-and-features)
+- [Dependencies](#dependencies)
+- [Project setup](#project-setup)
+- [Usage](#usage)
+- [Deployment](#deployment)
 
-# voyage-tasks
+## Project Description
 
-Your project's `readme` is as important to success as your code. For
-this reason you should put as much care into its creation and maintenance
-as you would any other component of the application.
+## Major Functions and Features
 
-If you are unsure of what should go into the `readme` let this article,
-written by an experienced Chingu, be your starting point -
-[Keys to a well written README](https://tinyurl.com/yk3wubft).
+## Dependencies
 
-And before we go there's "one more thing"! Once you decide what to include
-in your `readme` feel free to replace the text we've provided here.
+**Frontend**
 
-> Own it & Make it your Own!
+- [React](https://react.dev/learn)
+- [React Router](https://reactrouter.com/en/main)
+- [Moment](https://momentjs.com/)
+- [Mui](https://mui.com/)
+- [Emotion](https://emotion.sh/docs/introduction)
 
-## Team Documents
+**Backend**
 
-You may find these helpful as you work together to organize your project.
+- [Node.js](https://nodejs.org/en)
+- [Express](https://expressjs.com/)
+- [Nodemon](https://www.npmjs.com/package/nodemon)
+- [Mongoose](https://mongoosejs.com/)
+- [Jsonwebtoken](https://www.npmjs.com/package/jsonwebtoken)
+- [Bcryptjs](https://www.npmjs.com/package/bcrypt)
+- [Cors](https://www.npmjs.com/package/cors)
+- [Moment](https://momentjs.com/)
 
-- [Team Project Ideas](./docs/team_project_ideas.md)
-- [Team Decision Log](./docs/team_decision_log.md)
+## Project setup
 
-Meeting Agenda templates (located in the `/docs` directory in this repo):
+1. **Installation:**
 
-- Meeting - Voyage Kickoff --> ./docs/meeting-voyage_kickoff.docx
-- Meeting - App Vision & Feature Planning --> ./docs/meeting-vision_and_feature_planning.docx
-- Meeting - Sprint Retrospective, Review, and Planning --> ./docs/meeting-sprint_retrospective_review_and_planning.docx
-- Meeting - Sprint Open Topic Session --> ./docs/meeting-sprint_open_topic_session.docx
+   Before getting started, ensure you have Node.js and npm (Node Package Manager) installed on your system.
+   Run the following command, in both the backend folder and the frontend folder.
+
+   ```
+   npm install
+   ```
+
+2. **Running the App:**
+
+   To run the app locally in development mode, use the following command in the root folder.
+
+   ```
+   npm start
+   ```
+
+## Deployment
+
+- Preview link
+  https://taskzen-website.onrender.com/
+
+- Visuals (make a gif)

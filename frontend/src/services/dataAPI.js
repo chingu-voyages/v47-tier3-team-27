@@ -25,6 +25,8 @@ async function getTasks(userId) {
   });
   if (response.status === 200) {
     const data = await response.json();
+    console.log("data API response", data);
+
     return data;
   } else {
     const errorData = await response.json();

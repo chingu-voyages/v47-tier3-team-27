@@ -96,4 +96,22 @@ async function signOut(req, res) {
   }
 }
 
-module.exports = { signUp, signIn, signOut };
+
+async function checkEmailExists(req, res) {
+  const { email } = req.body;
+
+  try {
+    const user = await User.findOne({ email: email });
+    console.log("user", user);
+
+    if (user) {
+      res.status(200).send({ userId: user.id });
+    } else {
+      res.status(404).send({ message: "No user found with that email." });
+    }
+  } catch (error) {
+    res.status(500).send({ message: error });
+  }
+}
+
+module.exports = { signUp, signIn, signOut, checkEmailExists };

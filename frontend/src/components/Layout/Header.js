@@ -29,17 +29,21 @@ export default function Header() {
   return (
     <div className="w-full h-24 flex flex-row justify-between shadow-md bg-whiteOff z-20 fixed">
       <div className="h-full w-24 flex justify-center items-center">
-        <Link to="/">
+        <Link to="/dashboard">
           <img className="w-12	h-12" src={logo} alt="Task Zen logo" />
         </Link>
       </div>
-      <div className="relative h-full w-24 flex flex-col items-center	">
+      <div className="relative h-full w-fit flex flex-col items-center	mr-4">
         <button
-          className="h-full w-24 flex flex-row items-center	justify-evenly border-0"
+          className="h-full w-fit flex flex-row items-center	justify-evenly border-0"
           onClick={handleClick}
         >
           <p>{username}</p>
-          <img className="w-2.5	h-2.5" src={arrowDown} alt="arrow down" />
+          <img
+            className="w-2.5	h-2.5 ml-2.5 "
+            src={arrowDown}
+            alt="arrow down"
+          />
         </button>
         {show && (
           <button
