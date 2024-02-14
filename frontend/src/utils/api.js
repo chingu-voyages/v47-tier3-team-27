@@ -62,10 +62,22 @@ const checkEmailExists = async (email) => {
   }
 };
 
+const getTaskById = async (taskId) => {
+  console.log("taskId:", taskId);
+  try {
+    const response = await api.get(`/tasks/task/${taskId}`);
+    console.log("response:", response);
+    return response.data;
+  } catch (error) {
+    throw error;
+  }
+};
+
 export {
   getCategories,
   addTask,
   addCategory,
   addSubCategory,
   checkEmailExists,
+  getTaskById,
 };
