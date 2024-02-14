@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import Box from "@mui/material/Box";
 import Modal from "@mui/material/Modal";
-import Text from "../assets/text.png";
 import CloseIcon from "@mui/icons-material/Close";
 
 const api = process.env.REACT_APP_API_URL;
@@ -16,7 +15,7 @@ const style = {
   boxShadow: 24,
 };
 
-export default function Log({ taskId }) {
+export default function Log({ taskId, children }) {
   async function displayLogByTask() {
     await fetch(`${api}/logs/${taskId}/all`)
       .then((response) => {
@@ -41,17 +40,8 @@ export default function Log({ taskId }) {
 
   return (
     <div>
-      <div
-        className="text-sm p-2 hover:bg-lightGreen flex items-center gap-2"
-        onClick={handleOpen}
-      >
-        <img
-          src={Text}
-          className="w-4	h-4"
-          alt="click to open a log of this taks's changes history"
-        />
-        <span>View log</span>
-      </div>
+      <div onClick={handleOpen}>{children}</div>
+      
       <Modal
         open={open}
         onClose={handleClose}
@@ -86,7 +76,7 @@ export default function Log({ taskId }) {
                             {log.createdAt.slice(11, 16)})
                           </span>
                           <br />
-                          <hr  className="mb-2 mt-2"/>
+                          <hr className="mb-2 mt-2" />
                         </li>
                       );
                     })}
