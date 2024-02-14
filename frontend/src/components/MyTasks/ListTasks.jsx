@@ -19,8 +19,10 @@ export default function ListTasks(props) {
       setListUserTasks(tasksData);
 
       const allCategories = await dataAPI.getCategories();
+      console.log("allCategories", allCategories);
 
       const allSubCategories = await dataAPI.getSubCategories();
+      console.log("allSubCategories", allSubCategories);
 
       const updatedCategories = [];
       const updatedSubCategories = [];

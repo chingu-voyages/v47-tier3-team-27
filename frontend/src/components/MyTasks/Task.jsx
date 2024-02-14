@@ -8,14 +8,17 @@ import Text from "../../assets/text.png";
 
 export default function Task(props) {
   const { taskName, taskId, taskDays, dayWeek, dayMonth, calendarVue } = props;
-
+  console.log("taskName", taskName);
+  console.log("taskDays", taskDays);
   const [show, setShow] = useState(false);
 
   const checkboxesWeek = useMemo(() => {
     return dayWeek.map((day) => {
       if (
         taskDays.includes(day[0].toLowerCase()) ||
-        taskDays.includes(day[1].toString())
+        taskDays.includes(day[1])
+
+        // taskDays.includes(day[1].toString())
       ) {
         return (
           <div className="flex justify-center items-center" key={day} id={day}>
@@ -28,12 +31,12 @@ export default function Task(props) {
             <label
               htmlFor={`custom ${day} ${taskId}`}
               className="flex justify-center items-center	m-0 p-0 cursor-pointer  select-none text-slate-400  
-         before:h-3 before:w-3 
-        before:rounded-full before:border 
-        before:border-green-800 before:bg-white before:transition-[background-color] 
-        before:duration-300 before:ease-in 
-        peer-checked:before:bg-darkGreen 
-        peer-checked:before:transition-[background-color] peer-checked:before:duration-300 peer-checked:before:ease-in"
+                before:h-3 before:w-3 
+                before:rounded-full before:border 
+                before:border-green-800 before:bg-white before:transition-[background-color] 
+                before:duration-300 before:ease-in 
+                peer-checked:before:bg-darkGreen 
+                peer-checked:before:transition-[background-color] peer-checked:before:duration-300 peer-checked:before:ease-in"
             ></label>
           </div>
         );
@@ -81,14 +84,16 @@ export default function Task(props) {
   const checkBoxesMonth = useMemo(() => {
     // get two first letters of days to compare them
     const daysAfterSlice = [];
-    taskDays.forEach((taskDay) => {
-      daysAfterSlice.push(taskDay.slice(0, 2));
-    });
+
+    if (isNaN(taskDays[0]))
+      taskDays.forEach((taskDay) => {
+        daysAfterSlice.push(taskDay.slice(0, 2));
+      });
 
     return dayMonth.map((day) => {
       if (
         daysAfterSlice.includes(day[0].toLowerCase()) ||
-        taskDays.includes(day[1].toString())
+        taskDays.includes(day[1])
       ) {
         return (
           <div className="flex w-4 justify-between items-center" id={day}>
@@ -138,9 +143,7 @@ export default function Task(props) {
                 <span>Edit task</span>
               </div>
               <Log taskId={taskId}>
-                <div
-                  className="text-sm p-2 hover:bg-lightGreen flex items-center gap-2"
-                >
+                <div className="text-sm p-2 hover:bg-lightGreen flex items-center gap-2">
                   <img
                     src={Text}
                     className="w-4	h-4"
