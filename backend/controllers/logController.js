@@ -41,12 +41,12 @@ const editLog = async (req, res) => {
     const updatedLog = await Log.findByIdAndUpdate(req.params.logid, {
       logDescription: req.body.logDescription,
     });
-    
+
     if (!updatedLog) {
       return res.status(404).send({ error: "Log not found" });
     }
 
-    res.status(200).send({message: "Log updated successfully!"});
+    res.status(200).send({ message: "Log updated successfully!" });
   } catch (error) {
     res.status(500).send({ message: error });
   }

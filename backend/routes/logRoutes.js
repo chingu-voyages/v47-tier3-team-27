@@ -1,5 +1,10 @@
 const logRouter = require("express").Router();
-const { getLogsByTask, addLog, editLog, deleteLog } = require("../controllers/logController");
+const {
+  getLogsByTask,
+  addLog,
+  editLog,
+  deleteLog,
+} = require("../controllers/logController");
 
 logRouter.route("/:taskid/add").post(addLog);
 logRouter.route("/:logid/edit").patch(editLog);
