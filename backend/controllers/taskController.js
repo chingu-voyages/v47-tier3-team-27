@@ -109,10 +109,27 @@ async function deleteTask(req, res) {
   }
 }
 
+async function getTaskById(req, res) {
+  try {
+    const taskId = req.params.taskId;
+    const task = await Task.findById(taskId);
+
+    if (!task) {
+      return res.status(404).send({ error: "Task not found" });
+    }
+
+    res.status(200).send(task);
+  } catch (error) {
+    console.log(error);
+    res.status(500).send({ error: "Internal Server Error" });
+  }
+}
+
 module.exports = {
   addTask,
   editTask,
   deleteTask,
   getTasksByUserId,
   getDailyTasksByUserId,
+  getTaskById,
 };
