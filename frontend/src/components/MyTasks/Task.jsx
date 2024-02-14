@@ -5,6 +5,8 @@ import More from "../../assets/more.png";
 import Log from "../Log";
 import Invite from "../Invite";
 import Text from "../../assets/text.png";
+import { deleteTask } from "../../utils/api";
+import { FaRegTrashAlt } from "react-icons/fa";
 
 export default function Task(props) {
   const { taskName, taskId, taskDays, dayWeek, dayMonth, calendarVue } = props;
@@ -121,6 +123,16 @@ export default function Task(props) {
     });
   }, [taskDays, dayMonth, taskId]);
 
+  const handleDeleteTask = async (taskId) => {
+    try {
+      await deleteTask(taskId);
+      console.log("Task deleted successfully");
+      props.onTaskDelete(taskId);
+    } catch (error) {
+      console.error("Error deleting task:", error);
+    }
+  };
+
   return (
     <div className="flex flex-row w-full justify-between gap-3">
       <div className="flex flex-row w-1/3 justify-between gap-2">
@@ -141,6 +153,13 @@ export default function Task(props) {
               <div className="text-sm p-2 hover:bg-lightGreen flex items-center gap-2">
                 <img src={Pen} className="w-4	h-4" alt="update task" />
                 <span>Edit task</span>
+              </div>
+              <div
+                className="text-sm p-2 hover:bg-lightGreen flex items-center gap-2"
+                onClick={() => handleDeleteTask(taskId)}
+              >
+                <FaRegTrashAlt />
+                <span>Delete task</span>
               </div>
               <Log taskId={taskId}>
                 <div className="text-sm p-2 hover:bg-lightGreen flex items-center gap-2">

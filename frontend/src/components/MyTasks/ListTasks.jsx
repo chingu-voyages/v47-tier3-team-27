@@ -76,6 +76,11 @@ export default function ListTasks(props) {
     });
   };
 
+  const handleRemoveTask = (taskId) => {
+    const updatedTasks = listUserTasks.filter(task => task._id !== taskId);
+    setListUserTasks(updatedTasks);
+  };
+
   const checkTask = (subcategoryId) => {
     return listUserTasks.map((task, i) => {
       return subcategoryId === task.subcategory ? (
@@ -88,6 +93,7 @@ export default function ListTasks(props) {
             dayWeek={dayWeek}
             dayMonth={dayMonth}
             calendarVue={calendarVue}
+            onTaskDelete={handleRemoveTask}
           />
         </div>
       ) : (
