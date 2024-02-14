@@ -15,7 +15,7 @@ export default function Task(props) {
   const checkboxesWeek = useMemo(() => {
     return dayWeek.map((day) => {
       if (
-        taskDays.includes(day[0].toLowerCase()) ||
+        taskDays.includes(day[0]) ||
         taskDays.includes(day[1])
 
         // taskDays.includes(day[1].toString())
@@ -85,12 +85,14 @@ export default function Task(props) {
     // get two first letters of days to compare them
     const daysAfterSlice = [];
 
-    if (isNaN(taskDays[0]))
+    if (isNaN(taskDays[0])) {
       taskDays.forEach((taskDay) => {
-        daysAfterSlice.push(taskDay.slice(0, 2));
+        return daysAfterSlice.push(taskDay.slice(0, 2).toLowerCase());
       });
+    }
 
     return dayMonth.map((day) => {
+      console.log("daysAfterSlice", daysAfterSlice);
       if (
         daysAfterSlice.includes(day[0].toLowerCase()) ||
         taskDays.includes(day[1])
