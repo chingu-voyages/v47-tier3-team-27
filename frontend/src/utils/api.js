@@ -73,6 +73,28 @@ const getTaskById = async (taskId) => {
   }
 };
 
+const editTask = async (taskId, taskData) => {
+  console.log("Editing task with ID:", taskId, "Data:", taskData);
+  try {
+    const response = await api.patch(`/tasks/${taskId}`, taskData);
+    console.log("Edited task response:", response);
+    return response.data;
+  } catch (error) {
+    throw error;
+  }
+};
+
+const deleteTask = async (taskId) => {
+  console.log("Deleting task with ID:", taskId);
+  try {
+    const response = await api.delete(`/tasks/${taskId}`);
+    console.log("Deleted task response:", response);
+    return response.data;
+  } catch (error) {
+    throw error;
+  }
+};
+
 export {
   getCategories,
   addTask,
@@ -80,4 +102,6 @@ export {
   addSubCategory,
   checkEmailExists,
   getTaskById,
+  editTask,
+  deleteTask,
 };
