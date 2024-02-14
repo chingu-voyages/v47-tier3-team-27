@@ -1,5 +1,21 @@
 const API_URL = process.env.REACT_APP_API_URL;
 
+async function getDailyTasks(userId) {
+  const response = await fetch(`${API_URL}/tasks/daily/${userId}`, {
+    method: "GET",
+    headers: {
+      "Content-Type": "application/json",
+    },
+  });
+  if (response.status === 200) {
+    const data = await response.json();
+    return data;
+  } else {
+    const errorData = await response.json();
+    console.log("error data", errorData);
+  }
+}
+
 async function getTasks(userId) {
   const response = await fetch(`${API_URL}/tasks/${userId}`, {
     method: "GET",
@@ -50,6 +66,7 @@ async function getSubCategories() {
 
 const exportFunctions = {
   getTasks,
+  getDailyTasks,
   getCategories,
   getSubCategories,
 };
