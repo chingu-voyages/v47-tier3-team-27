@@ -1,5 +1,5 @@
-const mongoose = require('mongoose')
-const Schema = mongoose.Schema
+const mongoose = require("mongoose");
+const Schema = mongoose.Schema;
 
 const Task = new Schema ({
     name: { type: String, required: true },
@@ -13,7 +13,7 @@ const Task = new Schema ({
     priority: { type: Number }
 }, {
     timestamps: true,
-})
+  }
+);
 
-
-module.exports = mongoose.model('Task', Task )
+module.exports = mongoose.model("Task", Task);
