@@ -41,7 +41,7 @@ export default function Log({ taskId, children }) {
   return (
     <div>
       <div onClick={handleOpen}>{children}</div>
-      
+
       <Modal
         open={open}
         onClose={handleClose}
@@ -59,24 +59,16 @@ export default function Log({ taskId, children }) {
                   <ul>
                     {logs?.map((log) => {
                       return (
-                        <li key={log._id}>
-                          Task: <i>{log.taskid && <b>{log.taskid.name}</b>}</i>
-                          <br />
-                          user:{" "}
-                          {log.user && (
-                            <span>
-                              by <b>{log.user.username}</b>
-                            </span>
-                          )}
-                          <br />
-                          Description: {log.logDescription} <br />
-                          Date:{" "}
+                        <li
+                          key={log._id}
+                          className="flex justify-between gap-4"
+                        >
+                        {console.log(log)}
+                          <span>{log.logDescription}</span>
                           <span className="text-sm">
                             ({log.createdAt.slice(0, 10)},{" "}
                             {log.createdAt.slice(11, 16)})
                           </span>
-                          <br />
-                          <hr className="mb-2 mt-2" />
                         </li>
                       );
                     })}

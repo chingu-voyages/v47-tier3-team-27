@@ -1,6 +1,8 @@
 const moment = require("moment");
 
 const Task = require("../models/Task");
+const Log = require("../models/Log");
+const User = require("../models/User");
 
 async function getDailyTasksByUserId(req, res) {
   try {
@@ -20,7 +22,7 @@ async function getDailyTasksByUserId(req, res) {
 
     res.status(200).send(tasks);
   } catch (error) {
-    console.log(error);
+    res.status(500).send({ message: error });
     res.status(500).send({ error: "Internal Server Error" });
   }
 }
@@ -63,19 +65,32 @@ async function addTask(req, res) {
       priority,
     });
 
+    const userId = await User.findById(users[0]);
+
     const savedTask = await newTask.save();
-    console.log("savedTask", savedTask);
+
+    const addLog = new Log({
+      user: users[0],
+      taskid: savedTask._id,
+      logDescription: `${userId.username} created task.`,
+    });
+    await addLog.save();
+
+    savedTask.history.push(addLog);
+    savedTask.save();
+
+    //console.log("savedTask", savedTask);
     res.status(201).send(savedTask);
   } catch (error) {
     console.log(error);
-    res.status(500).send({ error: "Internal Server Error" });
+    res.status(500).send({ error: "Internal Server Error", message: error });
   }
 }
 
 async function editTask(req, res) {
   try {
     const taskId = req.params.taskId;
-    const updateFields = req.body;
+    const updateFields = req.body; // { updateFields, userId }
 
     const updatedTask = await Task.findByIdAndUpdate(taskId, updateFields, {
       new: true,
@@ -84,6 +99,20 @@ async function editTask(req, res) {
     if (!updatedTask) {
       return res.status(404).send({ error: "Task not found" });
     }
+
+    // To be uncommented (and checked if working) once userId is in req.body
+
+    // const user = await User.findById(userId)
+
+    // const addLog = new Log({
+    //   user: userId,
+    //   taskid: taskId,
+    //   logDescription: `${user.username} updated task`,
+    // });
+    // await addLog.save();
+
+    // const thisTask = await Task.findById(taskId)
+    // thisTask.history.push(addLog)
 
     res.status(200).send(updatedTask);
   } catch (error) {
