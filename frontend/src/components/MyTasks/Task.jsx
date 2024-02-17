@@ -14,6 +14,7 @@ export default function Task(props) {
   const checkboxesWeek = useMemo(() => {
     return dayWeek.map((day) => {
       if (taskDays.includes(day[0]) || taskDays.includes(day[1])) {
+
         return (
           <div className="flex justify-center items-center" key={day} id={day}>
             <input
