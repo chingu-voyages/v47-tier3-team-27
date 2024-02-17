@@ -1,4 +1,6 @@
 import React, { useState, useContext, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
+
 import CreatableSelect from "react-select/creatable";
 import Select from "react-select";
 import {
@@ -13,11 +15,12 @@ import { FaTrash } from "react-icons/fa";
 import linesBottom from "../assets/greenLinesBottom.png";
 
 export default function NewTask() {
+  const navigate = useNavigate();
   const [isLoading, setIsLoading] = useState(false);
   const [isSpecificDate, setIsSpecificDate] = useState(false);
   const [isRecurrence, setIsRecurrence] = useState(false);
   const [inputList, setInputList] = useState([]);
-  const { userId } = useContext(UserContext);
+  const { userId, setUserId, setUsername } = useContext(UserContext);
   const [successMessage, setSuccessMessage] = useState("");
   const [categories, setCategories] = useState([]);
   const [selectedCategory, setSelectedCategory] = useState(null);
@@ -35,6 +38,13 @@ export default function NewTask() {
     users: [userId],
     days: [],
   });
+
+  function checkToken() {
+    const token = localStorage.getItem("token");
+    if (!token) {
+      navigate("/");
+    }
+  }
 
   const daysOfWeekOptions = [
     { value: "Monday", label: "Monday" },
@@ -67,6 +77,14 @@ export default function NewTask() {
   };
 
   useEffect(() => {
+    checkToken();
+
+    const getUserId = localStorage.getItem("userId");
+    const getUserName = localStorage.getItem("username");
+
+    setUserId(getUserId);
+    setUsername(getUserName);
+
     const fetchCategories = async () => {
       try {
         const res = await getCategories();

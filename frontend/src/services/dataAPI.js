@@ -1,10 +1,12 @@
 const API_URL = process.env.REACT_APP_API_URL;
 
 async function getDailyTasks(userId) {
+  const token = localStorage.getItem("token");
   const response = await fetch(`${API_URL}/tasks/daily/${userId}`, {
     method: "GET",
     headers: {
       "Content-Type": "application/json",
+      Authorization: `Bearer ${token}`,
     },
   });
   if (response.status === 200) {
@@ -17,15 +19,16 @@ async function getDailyTasks(userId) {
 }
 
 async function getTasks(userId) {
+  const token = localStorage.getItem("token");
   const response = await fetch(`${API_URL}/tasks/${userId}`, {
     method: "GET",
     headers: {
       "Content-Type": "application/json",
+      Authorization: `Bearer ${token}`,
     },
   });
   if (response.status === 200) {
     const data = await response.json();
-    console.log("data API response", data);
 
     return data;
   } else {
@@ -35,10 +38,13 @@ async function getTasks(userId) {
 }
 
 async function getCategories() {
+  const token = localStorage.getItem("token");
+
   const response = await fetch(`${API_URL}/categories/all`, {
     method: "GET",
     headers: {
       "Content-Type": "application/json",
+      Authorization: `Bearer ${token}`,
     },
   });
   if (response.status === 200) {
@@ -51,10 +57,13 @@ async function getCategories() {
 }
 
 async function getSubCategories() {
+  const token = localStorage.getItem("token");
+
   const response = await fetch(`${API_URL}/subcategories/all`, {
     method: "GET",
     headers: {
       "Content-Type": "application/json",
+      Authorization: `Bearer ${token}`,
     },
   });
   if (response.status === 200) {
@@ -66,11 +75,29 @@ async function getSubCategories() {
   }
 }
 
+async function displayLogByTask(taskId) {
+  const token = localStorage.getItem("token");
+
+  const response = await fetch(`${API_URL}/logs/${taskId}/all`, {
+    method: "GET",
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${token}`,
+    },
+  });
+  if (!response.ok) {
+    throw new Error("Could not load history.");
+  }
+  const data = await response.json();
+  return data;
+}
+
 const exportFunctions = {
   getTasks,
   getDailyTasks,
   getCategories,
   getSubCategories,
+  displayLogByTask,
 };
 
 export default exportFunctions;

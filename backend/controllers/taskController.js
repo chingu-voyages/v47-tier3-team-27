@@ -18,8 +18,6 @@ async function getDailyTasksByUserId(req, res) {
       },
     });
 
-    console.log(tasks);
-
     res.status(200).send(tasks);
   } catch (error) {
     res.status(500).send({ message: error });

@@ -10,8 +10,8 @@ export const UserContext = createContext({
 });
 
 export const UserProvider = (props) => {
-  const [userId, setUserId] = useState("777");
-  const [username, setUsername] = useState("test");
+  const [userId, setUserId] = useState("");
+  const [username, setUsername] = useState("");
   const [userTasks, setUserTasks] = useState([]);
 
   const value = {

@@ -1,4 +1,6 @@
 const logRouter = require("express").Router();
+const { authJwt } = require("../middlewares/authJWT.js");
+
 const {
   getLogsByTask,
   addLog,
@@ -6,9 +8,9 @@ const {
   deleteLog,
 } = require("../controllers/logController");
 
-logRouter.route("/:taskid/add").post(addLog);
-logRouter.route("/:logid/edit").patch(editLog);
-logRouter.route("/:logid/delete").delete(deleteLog);
-logRouter.route("/:taskid/all").get(getLogsByTask);
+logRouter.post("/:taskid/add", [authJwt.verifyToken], addLog);
+logRouter.patch("/:logid/edit", [authJwt.verifyToken], editLog);
+logRouter.delete("/:logid/delete", [authJwt.verifyToken], deleteLog);
+logRouter.get("/:taskid/all", [authJwt.verifyToken], getLogsByTask);
 
 module.exports = logRouter;

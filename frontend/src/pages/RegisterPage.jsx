@@ -13,7 +13,6 @@ import { UserContext } from "../contexts/UserContext";
 
 export default function RegisterPage() {
   const navigate = useNavigate();
-  const { setUserId, setUserName } = useContext(UserContext);
   const handleSubmitSignUp = async (infoUser) => {
     try {
       const response = await authAPI.signUp(
@@ -22,9 +21,6 @@ export default function RegisterPage() {
         infoUser.password
       );
       if (response) {
-        setUserName(response.username);
-        setUserId(response.userId);
-
         navigate("/dashboard");
       }
     } catch (error) {

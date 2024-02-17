@@ -35,9 +35,10 @@ async function signUp(req, res) {
       allowInsecureKeySizes: true,
       expiresIn: 86400, // 24 hours
     });
-    console.log("token signup", token);
 
-    res.status(201).send({ token: token });
+    res
+      .status(201)
+      .send({ token: token, userId: response.id, username: response.username });
   } catch (error) {
     res.status(500).send({ message: error });
   }
@@ -51,7 +52,6 @@ async function signIn(req, res) {
   try {
     // search user in DB
     const user = await User.findOne({ email: email });
-    console.log("user", user);
 
     // handle if no user found
     if (!user) {
@@ -65,13 +65,11 @@ async function signIn(req, res) {
     }
 
     // if user exists and password is correct create JWT
-    const token = jwt.sign({ id: user.id }, config.secret, {
+    const token = jwt.sign({ userId: user.id }, config.secret, {
       algorithm: "HS256",
       allowInsecureKeySizes: true,
       expiresIn: 86400, // 24 hours
     });
-
-    console.log("token sign in", token);
 
     res.status(200).send({
       token: token,
@@ -87,7 +85,6 @@ async function signIn(req, res) {
 // SIGN OUT
 
 async function signOut(req, res) {
-  console.log(req);
   try {
     req.session = null;
     res.status(200).send({ message: "You've been signed out!" });
@@ -96,13 +93,11 @@ async function signOut(req, res) {
   }
 }
 
-
 async function checkEmailExists(req, res) {
   const { email } = req.body;
 
   try {
     const user = await User.findOne({ email: email });
-    console.log("user", user);
 
     if (user) {
       res.status(200).send({ userId: user.id });

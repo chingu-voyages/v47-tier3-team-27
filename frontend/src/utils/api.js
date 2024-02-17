@@ -6,8 +6,14 @@ const api = axios.create({
 });
 
 const getCategories = async () => {
+  const token = localStorage.getItem("token");
+
   try {
-    const response = await api.get("/categories/all");
+    const response = await api.get("/categories/all", {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
     console.log(response);
     return response.data;
   } catch (error) {
@@ -17,8 +23,14 @@ const getCategories = async () => {
 
 const addTask = async (taskData) => {
   console.log("taskData:", taskData);
+  const token = localStorage.getItem("token");
+
   try {
-    const response = await api.post("/tasks", taskData);
+    const response = await api.post("/tasks", taskData, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
     console.log("response:", response);
 
     return response.data;
@@ -28,9 +40,15 @@ const addTask = async (taskData) => {
 };
 
 const addCategory = async (categoryData) => {
+  const token = localStorage.getItem("token");
+
   console.log("categoryData:", categoryData);
   try {
-    const response = await api.post("/categories/add", categoryData);
+    const response = await api.post("/categories/add", categoryData, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
     console.log("response:", response);
 
     return response.data;
@@ -40,9 +58,15 @@ const addCategory = async (categoryData) => {
 };
 
 const addSubCategory = async (subCategoryData) => {
+  const token = localStorage.getItem("token");
+
   console.log("subCategoryData:", subCategoryData);
   try {
-    const response = await api.post("/subcategories/add", subCategoryData);
+    const response = await api.post("/subcategories/add", subCategoryData, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
     console.log("response:", response);
 
     return response.data;

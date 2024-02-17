@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-
+import { useNavigate } from "react-router-dom";
 import image from "../assets/Notebook-bro.png";
 import linesTop from "../assets/greenLinesTop.png";
 import linesBottom from "../assets/greenLinesBottom.png";
@@ -13,7 +13,9 @@ import { UserContext } from "../contexts/UserContext";
 const moment = require("moment");
 
 export default function MainDashboard() {
-  const { username, userId, userTasks } = useContext(UserContext);
+  const { username, setUsername, setUserId } = useContext(UserContext);
+
+  const navigate = useNavigate();
 
   const [tasks, setTaks] = useState([]);
 
@@ -23,13 +25,28 @@ export default function MainDashboard() {
 
   const formattedDate = currentDate.format("dddd, Do MMMM");
 
+  function checkToken() {
+    const token = localStorage.getItem("token");
+    if (!token) {
+      navigate("/");
+    }
+  }
+
   const getAllData = async () => {
+    const userId = localStorage.getItem("userId");
     const tasksData = await dataAPI.getDailyTasks(userId);
     setIsLoading(false);
     setTaks(tasksData);
   };
 
   useEffect(() => {
+    const getUserId = localStorage.getItem("userId");
+    const getUserName = localStorage.getItem("username");
+
+    setUserId(getUserId);
+    setUsername(getUserName);
+
+    checkToken();
     getAllData();
   }, []);
 
