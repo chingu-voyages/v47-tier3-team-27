@@ -16,29 +16,18 @@ const style = {
 };
 
 export default function Log({ taskId, children }) {
-  // async function displayLogByTask() {
-  //   const token = localStorage.getItem("token");
-
-  //   await fetch(`${api}/logs/${taskId}/all`)
-  //     .then((response) => {
-  //       if (!response.ok) {
-  //         throw new Error("Could not load history.");
-  //       }
-  //       return response.json();
-  //     })
-  //     .then((data) => setLogs(data))
-  //     .catch((error) => console.error(error));
-  // }
-
   const [logs, setLogs] = useState([]);
 
-  useEffect(() => {
-    const getData = dataAPI.displayLogByTask(taskId);
-    setLogs(getData);
-  }, [taskId]);
+  const getDataLog = async () => {
+    const response = await dataAPI.displayLogByTask(taskId);
+    setLogs(response.taskHistory);
+  };
 
   const [open, setOpen] = useState(false);
-  const handleOpen = () => setOpen(true);
+  const handleOpen = () => {
+    getDataLog();
+    setOpen(true);
+  };
   const handleClose = () => setOpen(false);
 
   return (
@@ -56,8 +45,8 @@ export default function Log({ taskId, children }) {
             <div className="p-2">
               <h3 className="font-bold pb-2 uppercase">Task history:</h3>
               <div>
-                {!logs.length ? (
-                  <div>Loading....</div>
+                {logs.length === 0 ? (
+                  <p>No history yet.</p>
                 ) : (
                   <ul>
                     {logs?.map((log) => {
@@ -66,7 +55,6 @@ export default function Log({ taskId, children }) {
                           key={log._id}
                           className="flex justify-between gap-4"
                         >
-                          {console.log(log)}
                           <span>{log.logDescription}</span>
                           <span className="text-sm">
                             ({log.createdAt.slice(0, 10)},{" "}

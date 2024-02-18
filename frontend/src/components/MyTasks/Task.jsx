@@ -1,4 +1,7 @@
-import React, { useMemo, useState } from "react";
+import React, { useContext, useMemo, useState } from "react";
+import { UserContext } from "../../contexts/UserContext";
+
+import dataAPI from "../../services/dataAPI";
 import Pen from "../../assets/pen.png";
 import More from "../../assets/more.png";
 
@@ -8,15 +11,40 @@ import Text from "../../assets/text.png";
 
 export default function Task(props) {
   const { taskName, taskId, taskDays, dayWeek, dayMonth, calendarVue } = props;
+  const { userId, username } = useContext(UserContext);
 
   const [show, setShow] = useState(false);
+  const [statusTask, setStatusTask] = useState("To complete");
+
+  const handleCheckboxClicked = () => {
+    if (statusTask === "To complete") {
+      setStatusTask(`Completed by {${username}`);
+    } else {
+      setStatusTask("To complete");
+    }
+    handleLogSubmit(`Completed by ${username}`);
+  };
+  const handleLogSubmit = async (logDescription) => {
+    try {
+      const response = await dataAPI.addLog(userId, taskId, logDescription);
+      if (response) {
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   const checkboxesWeek = useMemo(() => {
     return dayWeek.map((day) => {
       if (taskDays.includes(day[0]) || taskDays.includes(day[1])) {
 
         return (
-          <div className="flex justify-center items-center" key={day} id={day}>
+          <form
+            onClick={handleCheckboxClicked}
+            className="flex justify-center items-center"
+            key={day}
+            id={day}
+          >
             <input
               type="checkbox"
               className="hidden peer"
@@ -33,7 +61,7 @@ export default function Task(props) {
                 peer-checked:before:bg-darkGreen 
                 peer-checked:before:transition-[background-color] peer-checked:before:duration-300 peer-checked:before:ease-in"
             ></label>
-          </div>
+          </form>
         );
       } else {
         return <div key={day}></div>;
@@ -92,7 +120,8 @@ export default function Task(props) {
         taskDays.includes(day[1])
       ) {
         return (
-          <div
+          <form
+            onClick={handleCheckboxClicked}
             className="flex w-4 justify-between items-center"
             key={i}
             id={day}
@@ -113,7 +142,7 @@ export default function Task(props) {
         peer-checked:before:bg-darkGreen 
         peer-checked:before:transition-[background-color] peer-checked:before:duration-300 peer-checked:before:ease-in"
             ></label>
-          </div>
+          </form>
         );
       } else {
         return <div className="w-4" key={i}></div>;

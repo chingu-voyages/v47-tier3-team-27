@@ -18,14 +18,11 @@ app.use(express.json());
 app.use(cors());
 
 //api routes
-// "api/auth/signup"
 app.use("/api", authRoutes);
 app.use("/api/categories", categoryRoutes);
 app.use("/api/subcategories", subcategoryRoutes);
 app.use("/api/tasks", taskRoutes);
 app.use("/api/logs", logRoutes);
-
-// app.use("/api/users", userRoutes);
 
 const port = process.env.PORT || 5000;
 
