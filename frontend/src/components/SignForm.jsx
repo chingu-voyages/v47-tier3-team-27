@@ -64,12 +64,13 @@ export default function SignForm(props) {
         required
       />
 
-      <Button className="mt-10" type="submit">
+      <Button className="mt-4" type="submit">
         {buttonOneName}
       </Button>
 
+      <p className="text-sm text-center mt-8">or click here to {buttonTwoName.toLowerCase()}:</p>
       <Link to={navigationButtonTwo}>
-        <Button className="mt-10" type="white">
+        <Button className="mt-2" type="white">
           {buttonTwoName}
         </Button>
       </Link>

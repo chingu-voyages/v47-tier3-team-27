@@ -74,7 +74,7 @@ export default function SideNavbarMobile() {
               className={({ isActive }) =>
                 [
                   "flex flex-col items-center gap-1",
-                  isActive ? "text-white " : "text-white/50 ",
+                  isActive ? "text-white" : "text-white/50 hover:text-white",
                 ].join(" ")
               }
               to={nav.href}

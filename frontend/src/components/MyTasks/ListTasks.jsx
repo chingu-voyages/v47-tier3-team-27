@@ -5,6 +5,7 @@ import { useNavigate } from "react-router-dom";
 import { UserContext } from "../../contexts/UserContext";
 import dataAPI from "../../services/dataAPI";
 import Task from "./Task";
+import handIcon from "../../assets/arrow-right-long.svg"
 
 export default function ListTasks(props) {
   const navigate = useNavigate();
@@ -78,7 +79,7 @@ export default function ListTasks(props) {
       // if (matchingSubcategory) {
       return matchingSubcategory ? (
         <div key={`${category.subcategories}/${i}`}>
-          <h6 className="text-mediumGreen mt-2 font-medium">
+          <h6 className="text-mediumGreen mt-1 uppercase">
             {matchingSubcategory.name}
           </h6>
           {checkTask(matchingSubcategory._id)}
@@ -118,10 +119,10 @@ export default function ListTasks(props) {
           {listUserCategories.map((category, i) => {
             return (
               <div key={i} className="w-full">
-                <h5 className="text-darkGreen font-semibold mt-3">
+                <h5 className="text-darkGreen font-semibold mt-3 uppercase">
                   {category.name}
                 </h5>
-                <div>{checkSubcategory({ category })}</div>
+                <div className="ml-2">{checkSubcategory({ category })}</div>
               </div>
             );
           })}

@@ -151,7 +151,7 @@ export default function Task(props) {
   }, [taskDays, dayMonth, taskId]);
 
   return (
-    <div className="flex flex-row w-full justify-between gap-3">
+    <div className="ml-1 flex flex-row w-full justify-between gap-3">
       <div className="flex flex-row w-1/3 justify-between gap-2">
         <p className="text-darkGreen self-center font-normal">{taskName}</p>
         <div className="flex flex-row items-center justify-center relative">

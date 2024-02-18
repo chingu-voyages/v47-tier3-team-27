@@ -45,7 +45,7 @@ export default function Log({ taskId, children }) {
             <div className="p-2">
               <h3 className="font-bold pb-2 uppercase">Task history:</h3>
               <div>
-                {logs.length === 0 ? (
+                {logs?.length === 0 ? (
                   <p>No history yet.</p>
                 ) : (
                   <ul>
