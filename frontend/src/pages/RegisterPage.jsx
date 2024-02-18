@@ -3,13 +3,8 @@ import circles from "../assets/3circles.svg";
 import checklist from "../assets/checklist.svg";
 import Logo from "../components/Logo";
 import { useNavigate } from "react-router-dom";
-
 import SignForm from "../components/SignForm";
-
 import authAPI from "../services/authAPI";
-
-import { useContext } from "react";
-import { UserContext } from "../contexts/UserContext";
 
 export default function RegisterPage() {
   const navigate = useNavigate();

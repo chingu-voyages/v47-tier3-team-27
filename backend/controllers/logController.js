@@ -4,19 +4,16 @@ const Task = require("../models/Task");
 
 const addLog = async (req, res) => {
   try {
-    const { userId, logDescription } = req.body;
+    const { user, logDescription } = req.body;
     const taskid = req.params.taskid;
 
     const newLog = new Log({
-      userId,
+      user,
       taskid,
       logDescription,
     });
-
-    await newLog.save();
-
+    const response = await newLog.save();
     const task = await Task.findById(taskid);
-
     task.history.push(newLog);
     await task.save();
 
@@ -27,15 +24,17 @@ const addLog = async (req, res) => {
     res.status(500).send({ message: error });
   }
 };
+
 const getLogsByTask = async (req, res) => {
   try {
     const taskid = req.params.taskid;
     const task = await Task.findById(taskid).populate("history").exec();
-    res.json(task.history);
+    res.send({ taskHistory: task.history });
   } catch (error) {
     res.status(500).send({ message: error });
   }
 };
+
 const editLog = async (req, res) => {
   try {
     const updatedLog = await Log.findByIdAndUpdate(req.params.logid, {
