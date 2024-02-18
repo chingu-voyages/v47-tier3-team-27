@@ -6,8 +6,7 @@ const addLog = async (req, res) => {
   try {
     const { user, logDescription } = req.body;
     const taskid = req.params.taskid;
-    console.log("userId, logDescription", user, logDescription);
-    console.log("taskid", req.params.taskid);
+
     const newLog = new Log({
       user,
       taskid,
@@ -30,11 +29,12 @@ const getLogsByTask = async (req, res) => {
   try {
     const taskid = req.params.taskid;
     const task = await Task.findById(taskid).populate("history").exec();
-    res.json(task.history);
+    res.send({ taskHistory: task.history });
   } catch (error) {
     res.status(500).send({ message: error });
   }
 };
+
 const editLog = async (req, res) => {
   try {
     const updatedLog = await Log.findByIdAndUpdate(req.params.logid, {
