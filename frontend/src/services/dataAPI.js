@@ -110,6 +110,27 @@ async function addLog(user, taskId, logDescription) {
   return data;
 }
 
+async function EditTaskReq(taskId, form) {
+  const token = localStorage.getItem("token");
+
+  const response = await fetch(`${API_URL}/tasks/${taskId}`, {
+    method: "PATCH",
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${token}`,
+    },
+    body: JSON.stringify({
+      name: form.name,
+      taskDescription: form.description,
+    }),
+  });
+  if (!response.ok) {
+    throw new Error("Could not load history.");
+  }
+  const data = await response.json();
+  return data;
+}
+
 const exportFunctions = {
   getTasks,
   getDailyTasks,
@@ -117,6 +138,7 @@ const exportFunctions = {
   getSubCategories,
   displayLogByTask,
   addLog,
+  EditTaskReq,
 };
 
 export default exportFunctions;
