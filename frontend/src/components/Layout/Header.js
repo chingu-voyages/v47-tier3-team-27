@@ -1,6 +1,7 @@
 import React, { useContext, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import logo from "../../assets/LOGO.png";
+import logOutIcon from "../../assets/right-from-bracket.svg";
 import arrowDown from "../../assets/arrow-down.png";
 import { UserContext } from "../../contexts/UserContext";
 import authAPI from "../../services/authAPI";
@@ -47,9 +48,10 @@ export default function Header() {
         </button>
         {show && (
           <button
-            className="w-fit h-fit absolute bottom-0 left-0"
+            className="min-w-[7.5rem] flex  gap-2 items-center justify-center h-fit absolute bg-white bottom-[-0.5rem] right-1 shadow-md hover:font-semibold"
             onClick={handleSignOut}
           >
+            <img className="h-[1.1rem]" src={logOutIcon} />
             <p>Log out</p>
           </button>
         )}

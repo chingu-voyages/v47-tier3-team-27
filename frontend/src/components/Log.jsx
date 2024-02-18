@@ -57,7 +57,7 @@ export default function Log({ taskId, children }) {
               <h3 className="font-bold pb-2 uppercase">Task history:</h3>
               <div>
                 {!logs.length ? (
-                  <div>Loading....</div>
+                  <div>No history has been logged yet.</div>
                 ) : (
                   <ul>
                     {logs?.map((log) => {
