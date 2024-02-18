@@ -48,6 +48,7 @@ async function signUp(req, res) {
 
 async function signIn(req, res) {
   const { username, email, password } = req.body;
+  console.log("got here");
 
   try {
     // search user in DB

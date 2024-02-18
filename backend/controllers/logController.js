@@ -4,19 +4,17 @@ const Task = require("../models/Task");
 
 const addLog = async (req, res) => {
   try {
-    const { userId, logDescription } = req.body;
+    const { user, logDescription } = req.body;
     const taskid = req.params.taskid;
-
+    console.log("userId, logDescription", user, logDescription);
+    console.log("taskid", req.params.taskid);
     const newLog = new Log({
-      userId,
+      user,
       taskid,
       logDescription,
     });
-
-    await newLog.save();
-
+    const response = await newLog.save();
     const task = await Task.findById(taskid);
-
     task.history.push(newLog);
     await task.save();
 
@@ -27,6 +25,7 @@ const addLog = async (req, res) => {
     res.status(500).send({ message: error });
   }
 };
+
 const getLogsByTask = async (req, res) => {
   try {
     const taskid = req.params.taskid;

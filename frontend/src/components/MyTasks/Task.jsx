@@ -1,4 +1,7 @@
-import React, { useMemo, useState } from "react";
+import React, { useContext, useMemo, useState } from "react";
+import { UserContext } from "../../contexts/UserContext";
+
+import dataAPI from "../../services/dataAPI";
 import Pen from "../../assets/pen.png";
 import More from "../../assets/more.png";
 
@@ -8,14 +11,45 @@ import Text from "../../assets/text.png";
 
 export default function Task(props) {
   const { taskName, taskId, taskDays, dayWeek, dayMonth, calendarVue } = props;
+  const { userId } = useContext(UserContext);
 
   const [show, setShow] = useState(false);
+  const [statusTask, setStatusTask] = useState("To complete");
+
+  // const [formData, setFormData] = useState({
+  //   user: userId,
+  //   taskId: taskId,
+  //   logDescription: "",
+  // });
+  const handleCheckboxClicked = () => {
+    if (statusTask === "To complete") {
+      setStatusTask("Completed");
+    } else {
+      setStatusTask("To complete");
+    }
+    handleLogSubmit();
+  };
+  const handleLogSubmit = async () => {
+    try {
+      const response = await dataAPI.addLog(userId, taskId, statusTask);
+      if (response) {
+        console.log("log added");
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   const checkboxesWeek = useMemo(() => {
     return dayWeek.map((day) => {
       if (taskDays.includes(day[0]) || taskDays.includes(day[1])) {
         return (
-          <div className="flex justify-center items-center" key={day} id={day}>
+          <form
+            onClick={handleCheckboxClicked}
+            className="flex justify-center items-center"
+            key={day}
+            id={day}
+          >
             <input
               type="checkbox"
               className="hidden peer"
@@ -32,7 +66,7 @@ export default function Task(props) {
                 peer-checked:before:bg-darkGreen 
                 peer-checked:before:transition-[background-color] peer-checked:before:duration-300 peer-checked:before:ease-in"
             ></label>
-          </div>
+          </form>
         );
       } else {
         return <div key={day}></div>;

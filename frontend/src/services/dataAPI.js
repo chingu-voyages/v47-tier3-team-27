@@ -92,12 +92,31 @@ async function displayLogByTask(taskId) {
   return data;
 }
 
+async function addLog(user, taskId, logDescription) {
+  const token = localStorage.getItem("token");
+
+  const response = await fetch(`${API_URL}/logs/${taskId}/add`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${token}`,
+    },
+    body: JSON.stringify({ user, logDescription }),
+  });
+  if (!response.ok) {
+    throw new Error("Could not load history.");
+  }
+  const data = await response.json();
+  return data;
+}
+
 const exportFunctions = {
   getTasks,
   getDailyTasks,
   getCategories,
   getSubCategories,
   displayLogByTask,
+  addLog,
 };
 
 export default exportFunctions;
