@@ -8,6 +8,7 @@ import More from "../../assets/more.png";
 import Log from "../Log";
 import Invite from "../Invite";
 import Text from "../../assets/text.png";
+import EditTask from "../EditTask";
 
 export default function Task(props) {
   const { taskName, taskId, taskDays, dayWeek, dayMonth, calendarVue } = props;
@@ -37,7 +38,6 @@ export default function Task(props) {
   const checkboxesWeek = useMemo(() => {
     return dayWeek.map((day) => {
       if (taskDays.includes(day[0]) || taskDays.includes(day[1])) {
-
         return (
           <form
             onClick={handleCheckboxClicked}
@@ -167,10 +167,12 @@ export default function Task(props) {
             }`}
           >
             <div className="w-full cursor-pointer">
-              <div className="text-sm p-2 hover:bg-lightGreen flex items-center gap-2">
-                <img src={Pen} className="w-4	h-4" alt="update task" />
-                <span>Edit task</span>
-              </div>
+              <EditTask taskInfo={props}>
+                <div className="text-sm p-2 hover:bg-lightGreen flex items-center gap-2">
+                  <img src={Pen} className="w-4	h-4" alt="update task" />
+                  <span>Edit task</span>
+                </div>
+              </EditTask>
               <Log taskId={taskId}>
                 <div className="text-sm p-2 hover:bg-lightGreen flex items-center gap-2">
                   <img

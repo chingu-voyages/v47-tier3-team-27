@@ -5,7 +5,7 @@ import { useNavigate } from "react-router-dom";
 import { UserContext } from "../../contexts/UserContext";
 import dataAPI from "../../services/dataAPI";
 import Task from "./Task";
-import handIcon from "../../assets/arrow-right-long.svg"
+import handIcon from "../../assets/arrow-right-long.svg";
 
 export default function ListTasks(props) {
   const navigate = useNavigate();
@@ -98,6 +98,7 @@ export default function ListTasks(props) {
           <Task
             key={i}
             taskId={task._id}
+            taskDescription={task.taskDescription}
             taskName={task.name}
             taskDays={task.days}
             dayWeek={dayWeek}
