@@ -11,17 +11,13 @@ const addSubcategory = async (req, res) => {
       name,
     });
 
-    await newSubcategory.save();
+    const savedSubcategory = await newSubcategory.save();
 
-    //find a category by id
     const category = await Category.findById(categoryId);
-    category.subcategories.push(newSubcategory);
-
+    category.subcategories.push(savedSubcategory._id);
     await category.save();
 
-    res
-      .status(200)
-      .send({ message: "New subcategory saved and assigned to a category." });
+    res.status(200).json(savedSubcategory);
   } catch (error) {
     res.status(500).send({ message: error });
   }
@@ -38,6 +34,5 @@ const getSubcategories = async (req, res) => {
     res.status(500).send({ message: error });
   }
 };
-
 
 module.exports = { addSubcategory, getSubcategories };

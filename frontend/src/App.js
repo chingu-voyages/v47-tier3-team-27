@@ -8,10 +8,8 @@ import RegisterPage from "./pages/RegisterPage";
 import DashboardPage from "./pages/DashboardPage";
 import MyTasksPage from "./pages/MyTasksPage";
 import NewTaskPage from "./pages/NewTaskPage";
-import InvitePage from "./pages/InvitePage";
 import { UserProvider } from "./contexts/UserContext";
 import FourOhFour from "./pages/FourOhFour";
-
 
 function App() {
   return (
@@ -24,10 +22,7 @@ function App() {
             <Route path="/dashboard" element={<DashboardPage />} />
             <Route path="/mytasks" element={<MyTasksPage />} />
             <Route path="/newtask" element={<NewTaskPage />} />
-            <Route path="/invite" element={<InvitePage />} />
-
             <Route path="/*" element={<FourOhFour />} />
-
           </Routes>
         </BrowserRouter>
       </UserProvider>

@@ -10,9 +10,10 @@ const addCategory = async (req, res) => {
       name,
     });
 
-    await newCategory.save();
-    console.log("New Category created successfully!", newCategory);
-    res.status(200).send({ message: "Success" });
+    const savedCategory = await newCategory.save();
+    console.log("New Category created successfully!", savedCategory);
+
+    res.status(200).send(savedCategory);
   } catch (error) {
     res.status(500).send({ message: error });
   }

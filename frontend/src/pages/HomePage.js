@@ -2,21 +2,14 @@ import React from "react";
 import "../styles/HomePage.css";
 import circles from "../assets/3circles.svg";
 import plant from "../assets/plant.png";
-import fb from "../assets/fb.png";
 import img from "../assets/checklist-img.png";
-import twitter from "../assets/twitter.png";
-import gmail from "../assets/gmail.png";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import Logo from "../components/Logo";
 import authAPI from "../services/authAPI";
 import SignForm from "../components/SignForm";
 
-import { useContext } from "react";
-import { UserContext } from "../contexts/UserContext";
-
 export default function HomePage() {
   const navigate = useNavigate();
-  const { setUserId, setUsername, setUserTasks } = useContext(UserContext);
 
   const handleSignIn = async (infoUser) => {
     try {
@@ -26,10 +19,6 @@ export default function HomePage() {
         infoUser.password
       );
       if (response) {
-        console.log("response homepage", response);
-        setUserId(response.userId);
-        setUsername(response.username);
-        setUserTasks(response.tasks);
         navigate("/dashboard");
       }
     } catch (error) {
@@ -55,21 +44,6 @@ export default function HomePage() {
               buttonTwoName={"Register"}
               navigationButtonTwo={`/register`}
             />
-
-            <div>
-              <p className="or center">-------- or --------</p>
-              <div className="login-icons">
-                <Link>
-                  <img src={fb} alt="log in with facebook" />
-                </Link>
-                <Link>
-                  <img src={twitter} alt="log in with X" />
-                </Link>
-                <Link>
-                  <img src={gmail} alt="log in with GMail" />
-                </Link>
-              </div>
-            </div>
           </div>
         </aside>
 

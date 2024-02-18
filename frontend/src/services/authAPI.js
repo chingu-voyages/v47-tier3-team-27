@@ -8,11 +8,34 @@ async function signUp(username, email, password) {
       "Content-Type": "application/json",
     },
   });
-  console.log("sign up response", response);
   if (response.status === 201) {
     const data = await response.json();
-    const token = data.token;
-    sessionStorage.setItem("token", token);
+    localStorage.setItem("token", data.token);
+    localStorage.setItem("username", data.username);
+    localStorage.setItem("userId", data.userId);
+
+    return true;
+  } else {
+    const errorData = await response.json();
+    console.log("error data", errorData);
+  }
+}
+
+async function signIn(username, email, password) {
+  const response = await fetch(`${API_URL}/auth/signin`, {
+    method: "POST",
+    body: JSON.stringify({ username, email, password }),
+    headers: {
+      "Content-Type": "application/json",
+    },
+  });
+  if (response.status === 200) {
+    const data = await response.json();
+    localStorage.setItem("token", data.token);
+    localStorage.setItem("username", data.username);
+    localStorage.setItem("userTasks", data.tasks);
+    localStorage.setItem("userId", data.userId);
+
     return true;
   } else {
     // Registration failed, handle errors
@@ -21,33 +44,8 @@ async function signUp(username, email, password) {
   }
 }
 
-async function signIn(username, email, password) {
-  console.log("got here");
-  const response = await fetch(`${API_URL}/auth/signin`, {
-    method: "POST",
-    body: JSON.stringify({ username, email, password }),
-    headers: {
-      "Content-Type": "application/json",
-    },
-  });
-  console.log("response sign in", response);
-  if (response.status === 200) {
-    console.log("yep got here");
-    const data = await response.json();
-
-    const token = data.token;
-    sessionStorage.setItem("token", token);
-    console.log("if token, all good", token);
-    return data;
-  } else {
-    // Registration failed, handle errors
-    const errorData = await response.json();
-    console.log("error data", errorData);
-  }
-}
-
 async function signOut() {
-  const token = sessionStorage.getItem("token");
+  const token = localStorage.getItem("token");
   const response = await fetch(`${API_URL}/signout`, {
     method: "POST",
     headers: {
@@ -56,8 +54,12 @@ async function signOut() {
     },
   });
   if (response.status === 200) {
-    sessionStorage.removeItem("token");
-    console.log("done here");
+    localStorage.clear();
+    // localStorage.removeItem("token");
+    // localStorage.removeItem("userUsername");
+    // localStorage.removeItem("userTasks");
+    // localStorage.removeItem("userId");
+
     return true;
   } else {
     const errorData = await response.json();

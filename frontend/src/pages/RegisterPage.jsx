@@ -2,21 +2,12 @@ import React from "react";
 import circles from "../assets/3circles.svg";
 import checklist from "../assets/checklist.svg";
 import Logo from "../components/Logo";
-import { Link, useNavigate } from "react-router-dom";
-import fb from "../assets/fb.png";
-import twitter from "../assets/twitter.png";
-import gmail from "../assets/gmail.png";
-
+import { useNavigate } from "react-router-dom";
 import SignForm from "../components/SignForm";
-
 import authAPI from "../services/authAPI";
-
-import { useContext } from "react";
-import { UserContext } from "../contexts/UserContext";
 
 export default function RegisterPage() {
   const navigate = useNavigate();
-  const { setUserId, setUserName } = useContext(UserContext);
   const handleSubmitSignUp = async (infoUser) => {
     try {
       const response = await authAPI.signUp(
@@ -25,11 +16,6 @@ export default function RegisterPage() {
         infoUser.password
       );
       if (response) {
-        console.log("response register", response);
-        setUserName(response.username);
-        setUserId(response.userId);
-
-        console.log("user logged in");
         navigate("/dashboard");
       }
     } catch (error) {
@@ -69,20 +55,6 @@ export default function RegisterPage() {
               buttonTwoName={"Login"}
               navigationButtonTwo={`/`}
             />
-          </div>
-          <div>
-            <p className="or center">-------- or --------</p>
-            <div className="login-icons">
-              <Link>
-                <img src={fb} alt="log in with facebook" />
-              </Link>
-              <Link>
-                <img src={twitter} alt="log in with X" />
-              </Link>
-              <Link>
-                <img src={gmail} alt="log in with GMail" />
-              </Link>
-            </div>
           </div>
         </main>
       </section>
