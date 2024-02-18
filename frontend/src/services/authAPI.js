@@ -10,8 +10,10 @@ async function signUp(username, email, password) {
   });
   if (response.status === 201) {
     const data = await response.json();
-    const token = data.token;
-    sessionStorage.setItem("token", token);
+    localStorage.setItem("token", data.token);
+    localStorage.setItem("username", data.username);
+    localStorage.setItem("userId", data.userId);
+
     return true;
   } else {
     const errorData = await response.json();
@@ -29,10 +31,12 @@ async function signIn(username, email, password) {
   });
   if (response.status === 200) {
     const data = await response.json();
+    localStorage.setItem("token", data.token);
+    localStorage.setItem("username", data.username);
+    localStorage.setItem("userTasks", data.tasks);
+    localStorage.setItem("userId", data.userId);
 
-    const token = data.token;
-    sessionStorage.setItem("token", token);
-    return data;
+    return true;
   } else {
     // Registration failed, handle errors
     const errorData = await response.json();
@@ -41,7 +45,7 @@ async function signIn(username, email, password) {
 }
 
 async function signOut() {
-  const token = sessionStorage.getItem("token");
+  const token = localStorage.getItem("token");
   const response = await fetch(`${API_URL}/signout`, {
     method: "POST",
     headers: {
@@ -50,7 +54,12 @@ async function signOut() {
     },
   });
   if (response.status === 200) {
-    sessionStorage.removeItem("token");
+    localStorage.clear();
+    // localStorage.removeItem("token");
+    // localStorage.removeItem("userUsername");
+    // localStorage.removeItem("userTasks");
+    // localStorage.removeItem("userId");
+
     return true;
   } else {
     const errorData = await response.json();

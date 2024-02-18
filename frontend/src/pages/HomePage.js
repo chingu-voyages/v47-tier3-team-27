@@ -8,12 +8,8 @@ import Logo from "../components/Logo";
 import authAPI from "../services/authAPI";
 import SignForm from "../components/SignForm";
 
-import { useContext } from "react";
-import { UserContext } from "../contexts/UserContext";
-
 export default function HomePage() {
   const navigate = useNavigate();
-  const { setUserId, setUsername, setUserTasks } = useContext(UserContext);
 
   const handleSignIn = async (infoUser) => {
     try {
@@ -23,9 +19,6 @@ export default function HomePage() {
         infoUser.password
       );
       if (response) {
-        setUserId(response.userId);
-        setUsername(response.username);
-        setUserTasks(response.tasks);
         navigate("/dashboard");
       }
     } catch (error) {

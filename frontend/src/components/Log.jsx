@@ -2,8 +2,8 @@ import React, { useState, useEffect } from "react";
 import Box from "@mui/material/Box";
 import Modal from "@mui/material/Modal";
 import CloseIcon from "@mui/icons-material/Close";
+import dataAPI from "../services/dataAPI";
 
-const api = process.env.REACT_APP_API_URL;
 const style = {
   position: "absolute",
   top: "50%",
@@ -16,23 +16,26 @@ const style = {
 };
 
 export default function Log({ taskId, children }) {
-  async function displayLogByTask() {
-    await fetch(`${api}/logs/${taskId}/all`)
-      .then((response) => {
-        if (!response.ok) {
-          throw new Error("Could not load history.");
-        }
-        return response.json();
-      })
-      .then((data) => setLogs(data))
-      .catch((error) => console.error(error));
-  }
+  // async function displayLogByTask() {
+  //   const token = localStorage.getItem("token");
+
+  //   await fetch(`${api}/logs/${taskId}/all`)
+  //     .then((response) => {
+  //       if (!response.ok) {
+  //         throw new Error("Could not load history.");
+  //       }
+  //       return response.json();
+  //     })
+  //     .then((data) => setLogs(data))
+  //     .catch((error) => console.error(error));
+  // }
 
   const [logs, setLogs] = useState([]);
 
   useEffect(() => {
-    displayLogByTask();
-  }, []);
+    const getData = dataAPI.displayLogByTask(taskId);
+    setLogs(getData);
+  }, [taskId]);
 
   const [open, setOpen] = useState(false);
   const handleOpen = () => setOpen(true);
@@ -63,7 +66,7 @@ export default function Log({ taskId, children }) {
                           key={log._id}
                           className="flex justify-between gap-4"
                         >
-                        {console.log(log)}
+                          {console.log(log)}
                           <span>{log.logDescription}</span>
                           <span className="text-sm">
                             ({log.createdAt.slice(0, 10)},{" "}

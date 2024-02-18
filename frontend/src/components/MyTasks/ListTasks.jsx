@@ -1,28 +1,42 @@
 import React, { useEffect, useState, useContext } from "react";
+import { useNavigate } from "react-router-dom";
+
 // import data from "../../data/tasks-example.json";
 import { UserContext } from "../../contexts/UserContext";
 import dataAPI from "../../services/dataAPI";
 import Task from "./Task";
 
 export default function ListTasks(props) {
+  const navigate = useNavigate();
   const { dayWeek, dayMonth, calendarVue } = props;
-  const { userId } = useContext(UserContext);
+  const { userId, setUserId, setUsername } = useContext(UserContext);
   const [isLoading, setIsLoading] = useState(true);
 
   const [listUserTasks, setListUserTasks] = useState([]);
   const [listUserCategories, setListUserCategories] = useState();
   const [listUserSubCategories, setListUserSubCategories] = useState();
 
+  function checkToken() {
+    const token = localStorage.getItem("token");
+    if (!token) {
+      navigate("/");
+    }
+  }
+
   useEffect(() => {
+    checkToken();
+    let getUserId = localStorage.getItem("userId");
+    let getUserUsername = localStorage.getItem("username");
+    setUserId(getUserId);
+    setUsername(getUserUsername);
+
     const getAllData = async () => {
-      const tasksData = await dataAPI.getTasks(userId);
+      const tasksData = await dataAPI.getTasks(getUserId);
       setListUserTasks(tasksData);
 
       const allCategories = await dataAPI.getCategories();
-      console.log("allCategories", allCategories);
 
       const allSubCategories = await dataAPI.getSubCategories();
-      console.log("allSubCategories", allSubCategories);
 
       const updatedCategories = [];
       const updatedSubCategories = [];
@@ -56,14 +70,14 @@ export default function ListTasks(props) {
   }, [userId]);
 
   const checkSubcategory = ({ category }) => {
-    return category.subcategories.map((subcategoryInCategory) => {
+    return category.subcategories.map((subcategoryInCategory, i) => {
       const matchingSubcategory = listUserSubCategories.find(
         (subcategory) => subcategoryInCategory._id === subcategory._id
       );
 
       // if (matchingSubcategory) {
       return matchingSubcategory ? (
-        <div>
+        <div key={`${category.subcategories}/${i}`}>
           <h6 className="text-mediumGreen mt-2 font-medium">
             {matchingSubcategory.name}
           </h6>

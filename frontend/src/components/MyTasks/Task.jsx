@@ -8,18 +8,13 @@ import Text from "../../assets/text.png";
 
 export default function Task(props) {
   const { taskName, taskId, taskDays, dayWeek, dayMonth, calendarVue } = props;
-  console.log("taskName", taskName);
-  console.log("taskDays", taskDays);
+
   const [show, setShow] = useState(false);
 
   const checkboxesWeek = useMemo(() => {
     return dayWeek.map((day) => {
-      if (
-        taskDays.includes(day[0]) ||
-        taskDays.includes(day[1])
+      if (taskDays.includes(day[0]) || taskDays.includes(day[1])) {
 
-        // taskDays.includes(day[1].toString())
-      ) {
         return (
           <div className="flex justify-center items-center" key={day} id={day}>
             <input
@@ -41,7 +36,7 @@ export default function Task(props) {
           </div>
         );
       } else {
-        return <div></div>;
+        return <div key={day}></div>;
       }
     });
   }, [taskDays, dayWeek, taskId]);
@@ -91,14 +86,17 @@ export default function Task(props) {
       });
     }
 
-    return dayMonth.map((day) => {
-      console.log("daysAfterSlice", daysAfterSlice);
+    return dayMonth.map((day, i) => {
       if (
         daysAfterSlice.includes(day[0].toLowerCase()) ||
         taskDays.includes(day[1])
       ) {
         return (
-          <div className="flex w-4 justify-between items-center" id={day}>
+          <div
+            className="flex w-4 justify-between items-center"
+            key={i}
+            id={day}
+          >
             <input
               type="checkbox"
               className="hidden peer"
@@ -106,7 +104,7 @@ export default function Task(props) {
               name="checkbox task"
             />
             <label
-              for={`custom ${day} ${taskId}`}
+              htmlFor={`custom ${day} ${taskId}`}
               className=" flex m-0 p-0 items-center justify-center cursor-pointer select-none text-slate-400 
          before:h-3 before:w-3 
          before:rounded-full before:border 
@@ -118,7 +116,7 @@ export default function Task(props) {
           </div>
         );
       } else {
-        return <div className="w-4"></div>;
+        return <div className="w-4" key={i}></div>;
       }
     });
   }, [taskDays, dayMonth, taskId]);
